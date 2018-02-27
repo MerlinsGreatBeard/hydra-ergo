@@ -9,11 +9,15 @@
 	  (interactive)
 	  (other-window 1)
 	  (hydra-ergo-o-menu/body)) :color blue)
-  ("Ã¶" save-buffer :color blue)
+  ("ö" save-buffer :color blue)
   ("j" evil-search-forward :color blue)
   ("k" evil-search-backward :color blue)
   ("l" swiper :color blue)
-  ("c" hydra-ergo-c-menu/body :color blue))
+  ("c" hydra-ergo-c-menu/body :color blue)
+  ("2" split-window-below :color blue)
+  ("3" split-window-right :color blue)
+  ("4" delete-other-windows :color blue)
+  ("0" delete-window :color blue))
   (global-set-key (kbd "M-SPC") 'hydra-ergo/body)
 #+END_SRC
 
