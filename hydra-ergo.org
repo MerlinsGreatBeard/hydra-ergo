@@ -1,4 +1,4 @@
-* Hydra-Ergo  Some ergonomic shortcuts for common uses.
+* Hydra-Ergo Some ergonomic shortcuts for common uses.
 #+BEGIN_SRC emacs-lisp :results silent  
   (defhydra hydra-ergo (evil-normal-state-map "SPC" evil-motion-state-map :color blue)
   "hydra-ergo "
@@ -14,6 +14,7 @@
   ("j" evil-search-forward :color blue)
   ("k" evil-search-backward :color blue)
   ("l" swiper :color blue)
+  ("y" hydra-ergo-y-menu/body :color blue)
   ("c" hydra-ergo-c-menu/body :color blue)
   ("2" split-window-below :color blue)
   ("3" split-window-right :color blue)
@@ -39,4 +40,10 @@ c-menu
 (defhydra hydra-ergo-c-menu (:color blue)
   ("n" org-narrow-to-subtree)
   ("d" widen))
+#+END_SRC
+y-menu
+#+BEGIN_SRC emacs-lisp :results silent 
+  (defhydra hydra-ergo-y-menu (:color blue)
+    ("d" aya-create)
+    ("f" aya-expand))
 #+END_SRC
