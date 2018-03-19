@@ -1,4 +1,7 @@
 * Hydra-Ergo Some ergonomic shortcuts for common uses.
+  :PROPERTIES:
+  :ID:       3c84cb21-89c4-4784-a166-207419370f2e
+  :END:
 #+BEGIN_SRC emacs-lisp :results silent  
   (defhydra hydra-ergo (evil-normal-state-map "SPC" evil-motion-state-map :color blue)
   "hydra-ergo "
@@ -14,6 +17,7 @@
   ("j" evil-search-forward :color blue)
   ("k" evil-search-backward :color blue)
   ("l" swiper :color blue)
+  ("m" hydra-ergo-m-menu/body :color blue)
   ("y" hydra-ergo-y-menu/body :color blue)
   ("c" hydra-ergo-c-menu/body :color blue)
   ("2" split-window-below :color blue)
@@ -22,7 +26,6 @@
   ("0" delete-window :color blue))
   (global-set-key (kbd "M-SPC") 'hydra-ergo/body)
 #+END_SRC
-
 i-menu 
 #+BEGIN_SRC emacs-lisp :results silent
 (defhydra hydra-ergo-i-menu (:color blue)
@@ -46,4 +49,35 @@ y-menu
   (defhydra hydra-ergo-y-menu (:color blue)
     ("d" aya-create)
     ("f" aya-expand))
+#+END_SRC
+m-menu
+Corresponds to the xah-fly-t-keymap. k-map for qwerty.
+#+BEGIN_SRC emacs-lisp :results silent 
+  (defhydra hydra-ergo-m-menu (:color blue)
+     ;; ("SPC" xah-clean-whitespace)
+     ;; ("TAB" move-to-column)
+     ;; ("1" xah-clear-register-1)
+     ;; ("2" xah-append-to-register-1)
+     ;; ("3" xah-copy-to-register-1)
+     ;; ("4" xah-paste-from-register-1)
+     ("." sort-lines)
+     ("," sort-numeric-fields)
+     ("'" reverse-region)
+     ;; ("c" goto-char)
+     ("d" mark-defun)
+     ("e" list-matching-lines)
+     ;; ("f" goto-line)
+     ("i" delete-non-matching-lines)
+     ("j" copy-to-register)
+     ("l" insert-register)
+     ("k" kill-buffer)
+     ;; ("l" xah-escape-quotes)
+     ;; ("m" xah-make-backup-and-save)
+     ("n" repeat-complex-command)
+     ("p" query-replace-regexp)
+     ("r" copy-rectangle-to-register)
+     ("t" repeat)
+     ("u" delete-matching-lines)
+     ;; ("w" xah-next-window-or-frame)
+     ("y" delete-duplicate-lines))
 #+END_SRC
