@@ -6,6 +6,7 @@
   (defhydra hydra-ergo (evil-normal-state-map "SPC" evil-motion-state-map :color blue)
   "hydra-ergo "
   ("a" execute-extended-command :color blue)
+  ("d" hydra-ergo-d-menu/body :color blue)
   ("f" ivy-switch-buffer :color blue)
   ("i" hydra-ergo-i-menu/body :color blue)
   ("o" (lambda ()
@@ -80,4 +81,12 @@ Corresponds to the xah-fly-t-keymap. k-map for qwerty.
      ("u" delete-matching-lines)
      ;; ("w" xah-next-window-or-frame)
      ("y" delete-duplicate-lines))
+#+END_SRC
+_d-menu_
+I can't find the dired command in xah-fly-keys and since the "d" key is bound to things already 
+handled by vim I'll use d-menu as a dired-keymap
+#+BEGIN_SRC emacs-lisp :results silent 
+  (defhydra hydra-ergo-d-menu (:color blue)
+    ("f" dired)
+    ("j" dired-jump))
 #+END_SRC
