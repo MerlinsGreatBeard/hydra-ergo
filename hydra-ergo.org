@@ -40,10 +40,12 @@ o-menu
 	("o" other-window :color red))
 #+END_SRC
 c-menu
+I'm using c for org-mode so far. In xah-keys it's used for copy or selecting which evil-mode handles for me instead.
 #+BEGIN_SRC emacs-lisp :results silent
-(defhydra hydra-ergo-c-menu (:color blue)
-  ("n" org-narrow-to-subtree)
-  ("d" widen))
+  (defhydra hydra-ergo-c-menu (:color blue)
+    ("n" org-narrow-to-subtree)
+    ("d" widen)
+    ("j" (org-brain-visualize (org-brain-entry-at-pt))))
 #+END_SRC
 y-menu
 #+BEGIN_SRC emacs-lisp :results silent 
