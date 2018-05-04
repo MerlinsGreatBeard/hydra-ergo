@@ -45,7 +45,10 @@ I'm using c for org-mode so far. In xah-keys it's used for copy or selecting whi
   (defhydra hydra-ergo-c-menu (:color blue)
     ("n" org-narrow-to-subtree)
     ("d" widen)
-    ("j" (org-brain-visualize (org-brain-entry-at-pt))))
+    ("j" (org-brain-visualize (org-brain-entry-at-pt)))
+    ("x" (org-cut-special))
+    ("w" (org-copy-special))
+    ("y" (org-paste-special nil)))
 #+END_SRC
 y-menu
 #+BEGIN_SRC emacs-lisp :results silent 
