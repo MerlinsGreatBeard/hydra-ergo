@@ -93,5 +93,6 @@ handled by vim I'll use d-menu as a dired-keymap
 #+BEGIN_SRC emacs-lisp :results silent 
   (defhydra hydra-ergo-d-menu (:color blue)
     ("f" dired)
-    ("j" dired-jump))
+    ("j" dired-jump)
+    ("k" ranger))
 #+END_SRC
