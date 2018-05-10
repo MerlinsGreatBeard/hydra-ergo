@@ -57,7 +57,8 @@ y-menu
     ("f" aya-expand))
 #+END_SRC
 m-menu
-Corresponds to the xah-fly-t-keymap. k-map for qwerty.
+Copied from the xah-fly-t-keymap. k-map for qwerty.
+Replace with buffer functions over time.
 #+BEGIN_SRC emacs-lisp :results silent 
   (defhydra hydra-ergo-m-menu (:color blue)
      ;; ("SPC" xah-clean-whitespace)
@@ -81,7 +82,7 @@ Corresponds to the xah-fly-t-keymap. k-map for qwerty.
      ;; ("m" xah-make-backup-and-save)
      ("n" repeat-complex-command)
      ("p" query-replace-regexp)
-     ("r" copy-rectangle-to-register)
+     ("r" revert-buffer)
      ("t" repeat)
      ("u" delete-matching-lines)
      ;; ("w" xah-next-window-or-frame)
