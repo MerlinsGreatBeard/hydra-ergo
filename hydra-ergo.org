@@ -13,6 +13,7 @@
 	  (interactive)
 	  (other-window 1)
 	  (hydra-ergo-o-menu/body)) :color blue)
+  ("r" hydra-ergo-r-menu/body :color blue)
   ("ö" save-buffer :color blue)
   ("w" ace-window :color blue)
   ("j" evil-search-forward :color blue)
@@ -28,73 +29,83 @@
   ("," fixup-whitespace :color blue))
   (global-set-key (kbd "M-SPC") 'hydra-ergo/body)
 #+END_SRC
-i-menu 
-#+BEGIN_SRC emacs-lisp :results silent
-(defhydra hydra-ergo-i-menu (:color blue)
-	"i-menu"
-	("i" find-file)
-	("o" bookmark-jump))
-#+END_SRC
-o-menu
-#+BEGIN_SRC emacs-lisp :results silent
-(defhydra hydra-ergo-o-menu (:color red)
-	("o" other-window :color red))
-#+END_SRC
-c-menu
-I'm using c for org-mode so far. In xah-keys it's used for copy or selecting which evil-mode handles for me instead.
-#+BEGIN_SRC emacs-lisp :results silent
-  (defhydra hydra-ergo-c-menu (:color blue)
-    ("n" org-narrow-to-subtree)
-    ("d" widen)
-    ("j" (org-brain-visualize (org-brain-entry-at-pt)))
-    ("x" (org-cut-special))
-    ("w" (org-copy-special))
-    ("y" (org-paste-special nil)))
-#+END_SRC
-y-menu
-#+BEGIN_SRC emacs-lisp :results silent 
-  (defhydra hydra-ergo-y-menu (:color blue)
-    ("d" aya-create)
-    ("f" aya-expand))
-#+END_SRC
-m-menu
-Copied from the xah-fly-t-keymap. k-map for qwerty.
-Replace with buffer functions over time.
-#+BEGIN_SRC emacs-lisp :results silent 
-  (defhydra hydra-ergo-m-menu (:color blue)
-     ;; ("SPC" xah-clean-whitespace)
-     ;; ("TAB" move-to-column)
-     ;; ("1" xah-clear-register-1)
-     ;; ("2" xah-append-to-register-1)
-     ;; ("3" xah-copy-to-register-1)
-     ;; ("4" xah-paste-from-register-1)
-     ("." sort-lines)
-     ("," sort-numeric-fields)
-     ("'" reverse-region)
-     ;; ("c" goto-char)
-     ("d" mark-defun)
-     ("e" list-matching-lines)
-     ;; ("f" goto-line)
-     ("i" delete-non-matching-lines)
-     ("j" copy-to-register)
-     ("l" insert-register)
-     ("k" kill-buffer)
-     ;; ("l" xah-escape-quotes)
-     ;; ("m" xah-make-backup-and-save)
-     ("n" repeat-complex-command)
-     ("p" query-replace-regexp)
-     ("r" revert-buffer)
-     ("t" repeat)
-     ("u" delete-matching-lines)
-     ;; ("w" xah-next-window-or-frame)
-     ("y" delete-duplicate-lines))
-#+END_SRC
-_d-menu_
-I can't find the dired command in xah-fly-keys and since the "d" key is bound to things already 
-handled by vim I'll use d-menu as a dired-keymap
-#+BEGIN_SRC emacs-lisp :results silent 
-  (defhydra hydra-ergo-d-menu (:color blue)
-    ("f" dired)
-    ("j" dired-jump)
-    ("k" ranger))
-#+END_SRC
+** c-menu
+ I'm using c for org-mode so far. In xah-keys it's used for copy or selecting which evil-mode handles for me instead.
+ #+BEGIN_SRC emacs-lisp :results silent
+   (defhydra hydra-ergo-c-menu (:color blue)
+     ("n" org-narrow-to-subtree)
+     ("d" widen)
+     ("j" (org-brain-visualize (org-brain-entry-at-pt)))
+     ("x" (org-cut-special))
+     ("w" (org-copy-special))
+     ("y" (org-paste-special nil)))
+ #+END_SRC
+** d-menu_
+ I can't find the dired command in xah-fly-keys and since the "d" key is bound to things already 
+ handled by vim I'll use d-menu as a dired-keymap
+ #+BEGIN_SRC emacs-lisp :results silent 
+   (defhydra hydra-ergo-d-menu (:color blue)
+     ("f" dired)
+     ("j" dired-jump)
+     ("k" ranger))
+ #+END_SRC
+** e-menu
+ Encapsulate e.g. (),{} etc
+** i-menu 
+ #+BEGIN_SRC emacs-lisp :results silent
+ (defhydra hydra-ergo-i-menu (:color blue)
+	 "i-menu"
+	 ("i" find-file)
+	 ("o" bookmark-jump))
+ #+END_SRC
+** m-menu
+ Copied from the xah-fly-t-keymap. k-map for qwerty.
+ Replace with buffer functions over time.
+ #+BEGIN_SRC emacs-lisp :results silent 
+   (defhydra hydra-ergo-m-menu (:color blue)
+      ;; ("SPC" xah-clean-whitespace)
+      ;; ("TAB" move-to-column)
+      ;; ("1" xah-clear-register-1)
+      ;; ("2" xah-append-to-register-1)
+      ;; ("3" xah-copy-to-register-1)
+      ;; ("4" xah-paste-from-register-1)
+      ("." sort-lines)
+      ("," sort-numeric-fields)
+      ("'" reverse-region)
+      ;; ("c" goto-char)
+      ("d" mark-defun)
+      ("e" list-matching-lines)
+      ;; ("f" goto-line)
+      ("i" delete-non-matching-lines)
+      ("j" copy-to-register)
+      ("l" insert-register)
+      ("k" kill-buffer)
+      ;; ("l" xah-escape-quotes)
+      ;; ("m" xah-make-backup-and-save)
+      ("n" repeat-complex-command)
+      ("p" query-replace-regexp)
+      ("r" revert-buffer)
+      ("t" repeat)
+      ("u" delete-matching-lines)
+      ;; ("w" xah-next-window-or-frame)
+      ("y" delete-duplicate-lines))
+ #+END_SRC
+** o-menu
+ #+BEGIN_SRC emacs-lisp :results silent
+ (defhydra hydra-ergo-o-menu (:color red)
+	 ("o" other-window :color red))
+ #+END_SRC
+** r-menu
+   Register and logical operations.
+   #+BEGIN_SRC emacs-lisp :results silent 
+     (defhydra hydra-ergo-r-menu (:color blue)
+       "r-menu"
+       ("i" org-increase-number-at-point)
+       ("d" org-decrease-number-at-point))
+   #+END_SRC
+** y-menu
+ #+BEGIN_SRC emacs-lisp :results silent 
+   (defhydra hydra-ergo-y-menu (:color blue)
+     ("d" aya-create)
+     ("f" aya-expand))
+ #+END_SRC
