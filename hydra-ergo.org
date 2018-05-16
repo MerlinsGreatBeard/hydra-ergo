@@ -100,8 +100,8 @@
    #+BEGIN_SRC emacs-lisp :results silent 
      (defhydra hydra-ergo-r-menu (:color blue)
        "r-menu"
-       ("i" org-increase-number-at-point)
-       ("d" org-decrease-number-at-point))
+       ("i" evil-numbers/inc-at-pt)
+       ("d" evil-numbers/dec-at-pt))
    #+END_SRC
 ** y-menu
  #+BEGIN_SRC emacs-lisp :results silent 
