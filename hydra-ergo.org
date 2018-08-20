@@ -35,6 +35,7 @@
    (defhydra hydra-ergo-c-menu (:color blue)
      ("n" org-narrow-to-subtree)
      ("d" widen)
+     ("i" hydra-ergo-org-download/body)
      ("j" (org-brain-visualize (org-brain-entry-at-pt)))
      ("x" (org-cut-special))
      ("w" (org-copy-special))
@@ -109,3 +110,10 @@
      ("d" aya-create)
      ("f" aya-expand))
  #+END_SRC
+** Subhydras
+*** org-download
+   #+BEGIN_SRC emacs-lisp :results silent
+     (defhydra hydra-ergo-org-download (:color blue)
+       ("i" org-download-screenshot))
+   #+END_SRC 
+   
