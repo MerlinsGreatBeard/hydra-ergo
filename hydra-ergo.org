@@ -30,6 +30,9 @@
   (global-set-key (kbd "M-SPC") 'hydra-ergo/body)
 #+END_SRC
 ** c-menu
+   :PROPERTIES:
+   :ID:       70aa02bf-39b5-4abb-9fe1-aef8a6c0a1ab
+   :END:
  I'm using c for org-mode so far. In xah-keys it's used for copy or selecting which evil-mode handles for me instead.
  #+BEGIN_SRC emacs-lisp :results silent
    (defhydra hydra-ergo-c-menu (:color blue)
@@ -42,6 +45,9 @@
      ("y" (org-paste-special nil)))
  #+END_SRC
 ** d-menu_
+   :PROPERTIES:
+   :ID:       b9e34c0b-1b1a-4f90-a42e-a07994ddf827
+   :END:
  I can't find the dired command in xah-fly-keys and since the "d" key is bound to things already 
  handled by vim I'll use d-menu as a dired-keymap
  #+BEGIN_SRC emacs-lisp :results silent 
@@ -53,6 +59,9 @@
 ** e-menu
  Encapsulate e.g. (),{} etc
 ** i-menu 
+   :PROPERTIES:
+   :ID:       8b982e6c-4461-4a53-95ca-cf9d0ec9779d
+   :END:
  #+BEGIN_SRC emacs-lisp :results silent
  (defhydra hydra-ergo-i-menu (:color blue)
 	 "i-menu"
@@ -60,6 +69,9 @@
 	 ("o" bookmark-jump))
  #+END_SRC
 ** m-menu
+   :PROPERTIES:
+   :ID:       7cab08df-e421-4331-b64b-6c0a50727245
+   :END:
  Copied from the xah-fly-t-keymap. k-map for qwerty.
  Replace with buffer functions over time.
  #+BEGIN_SRC emacs-lisp :results silent 
@@ -92,11 +104,17 @@
       ("y" delete-duplicate-lines))
  #+END_SRC
 ** o-menu
+   :PROPERTIES:
+   :ID:       fd2e6082-b530-4572-9bac-74fa80fee2ac
+   :END:
  #+BEGIN_SRC emacs-lisp :results silent
  (defhydra hydra-ergo-o-menu (:color red)
 	 ("o" other-window :color red))
  #+END_SRC
 ** r-menu
+   :PROPERTIES:
+   :ID:       5f95bea7-bd96-4edc-b415-e87fad0d23fe
+   :END:
    Register and logical operations.
    #+BEGIN_SRC emacs-lisp :results silent 
      (defhydra hydra-ergo-r-menu (:color blue)
@@ -105,6 +123,9 @@
        ("d" evil-numbers/dec-at-pt))
    #+END_SRC
 ** y-menu
+   :PROPERTIES:
+   :ID:       e2117bde-9f29-4a17-a6a3-a8bcb23ab7d5
+   :END:
  #+BEGIN_SRC emacs-lisp :results silent 
    (defhydra hydra-ergo-y-menu (:color blue)
      ("d" aya-create)
@@ -112,8 +133,12 @@
  #+END_SRC
 ** Subhydras
 *** org-download
+    :PROPERTIES:
+    :ID:       8c65b7bf-859e-403c-ace9-7b1b9ccff70c
+    :END:
    #+BEGIN_SRC emacs-lisp :results silent
      (defhydra hydra-ergo-org-download (:color blue)
-       ("i" org-download-screenshot))
+       ("i" org-download-screenshot)
+       ("d" org-download-delete))
    #+END_SRC 
    
