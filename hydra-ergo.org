@@ -20,6 +20,7 @@
   ("k" evil-search-backward :color blue)
   ("l" swiper :color blue)
   ("m" hydra-ergo-m-menu/body :color blue)
+  ("s" hydra-ergo-s-menu/body :color blue)
   ("y" hydra-ergo-y-menu/body :color blue)
   ("c" hydra-ergo-c-menu/body :color blue)
   ("2" split-window-below :color blue)
@@ -123,6 +124,16 @@
        ("i" evil-numbers/inc-at-pt)
        ("d" evil-numbers/dec-at-pt))
    #+END_SRC
+** s-menu
+   Format org text
+   #+BEGIN_SRC emacs-lisp :results silent 
+     (defhydra hydra-ergo-s-menu (:color blue)
+       "Format Text org-mode-style"
+       ("i" (ergo-surround #x2F))
+       ("b" (ergo-surround #x2A))
+       ("u" (ergo-surround #x5F))
+       ("k" (ergo-surround #x2D)))
+   #+END_SRC
 ** y-menu
    :PROPERTIES:
    :ID:       e2117bde-9f29-4a17-a6a3-a8bcb23ab7d5
@@ -142,4 +153,15 @@
        ("i" org-download-screenshot)
        ("d" org-download-delete))
    #+END_SRC 
-   
+** Help Functions
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun ergo-surround (c)
+      (interactive)
+      (backward-char)
+      (evil-forward-WORD-end)
+      (forward-char)
+      (insert-char c)
+      (evil-backward-WORD-begin)
+      (insert-char c)
+      (evil-forward-WORD-end))
+#+END_SRC
