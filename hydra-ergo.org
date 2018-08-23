@@ -25,6 +25,7 @@
   ("2" split-window-below :color blue)
   ("3" split-window-right :color blue)
   ("4" delete-other-windows :color blue)
+  ("5" make-frame-command :color blue)
   ("0" delete-window :color blue)
   ("," fixup-whitespace :color blue))
   (global-set-key (kbd "M-SPC") 'hydra-ergo/body)
