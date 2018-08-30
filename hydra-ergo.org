@@ -70,7 +70,11 @@
 	   ("e" find-file)
 	   ("o" bookmark-jump)
 	   ("p" bookmark-set)
+<<<<<<< HEAD
 	   ("i" bookmark-bmenu-list))
+=======
+	   ("i" bookmark-bmenu-list)))
+>>>>>>> origin/master
  #+END_SRC
 ** m-menu
    :PROPERTIES:
