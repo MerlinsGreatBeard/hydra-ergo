@@ -65,10 +65,12 @@
    :ID:       8b982e6c-4461-4a53-95ca-cf9d0ec9779d
    :END:
  #+BEGIN_SRC emacs-lisp :results silent
- (defhydra hydra-ergo-i-menu (:color blue)
-	 "i-menu"
-	 ("i" find-file)
-	 ("o" bookmark-jump))
+   (defhydra hydra-ergo-i-menu (:color blue)
+	   "i-menu"
+	   ("e" find-file)
+	   ("o" bookmark-jump)
+	   ("p" bookmark-set)
+	   ("i" bookmark-bmenu-list))
  #+END_SRC
 ** m-menu
    :PROPERTIES:
@@ -125,6 +127,9 @@
        ("d" evil-numbers/dec-at-pt))
    #+END_SRC
 ** s-menu
+   :PROPERTIES:
+   :ID:       257c02d8-e550-4c31-b796-5f5af560a03b
+   :END:
    Format org text
    #+BEGIN_SRC emacs-lisp :results silent 
      (defhydra hydra-ergo-s-menu (:color blue)
@@ -154,6 +159,9 @@
        ("d" org-download-delete))
    #+END_SRC 
 ** Help Functions
+   :PROPERTIES:
+   :ID:       ce94237c-1725-4a67-aba4-b1ce691d16aa
+   :END:
 #+BEGIN_SRC emacs-lisp :results silent
   (defun ergo-surround (c)
       (interactive)
