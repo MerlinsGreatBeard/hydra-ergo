@@ -42,6 +42,7 @@
      ("d" widen)
      ("i" hydra-ergo-org-download/body)
      ("j" (org-brain-visualize (org-brain-entry-at-pt)))
+     ("o" (org-pomodoro))
      ("x" (org-cut-special))
      ("w" (org-copy-special))
      ("y" (org-paste-special nil)))
@@ -59,7 +60,7 @@
      ("k" ranger))
  #+END_SRC
 ** e-menu
- Encapsulate e.g. (),{} etc
+   Encapsulate e.g. (),{} etc
 ** i-menu 
    :PROPERTIES:
    :ID:       8b982e6c-4461-4a53-95ca-cf9d0ec9779d
