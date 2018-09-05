@@ -48,6 +48,7 @@
 	    (org-pomodoro)))
      ("x" (org-cut-special))
      ("w" (org-copy-special))
+     ("s" (org-sparse-tree))
      ("y" (org-paste-special nil)))
  #+END_SRC
 ** d-menu_
@@ -178,10 +179,10 @@
       (evil-forward-WORD-end))
 #+END_SRC
 #+BEGIN_SRC emacs-lisp :results silent
-(defun set-pomodoro-len-from-property ()
-  "Pomodoro length can be set by org property."
-  (let ((len (org-entry-get (point) "POMODORO")))
-    (if len
-	(setq  org-pomodoro-length (string-to-number len))
-      (setq org-pomodoro-length 25))))
+  (defun set-pomodoro-len-from-property ()
+    "Pomodoro length can be set by org property."
+    (let ((len (org-entry-get (point) "POMODORO")))
+      (if len
+	  (setq  org-pomodoro-length (string-to-number len))
+	nil)))
 #+END_SRC
