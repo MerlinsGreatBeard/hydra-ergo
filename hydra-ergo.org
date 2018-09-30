@@ -42,6 +42,7 @@
      ("d" widen)
      ("i" hydra-ergo-org-download/body)
      ("j" (org-brain-visualize (org-brain-entry-at-pt)))
+     ("k" (org-pomodoro-kill))
      ("o" (lambda ()
 	    (interactive)
 	    (set-pomodoro-len-from-property)
