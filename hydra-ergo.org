@@ -140,7 +140,8 @@
    #+BEGIN_SRC emacs-lisp :results silent 
      (defhydra hydra-ergo-s-menu (:color blue)
        "Format Text org-mode-style"
-       ("i" (ergo-surround #x2F))
+       ;; ("i" (ergo-surround #x2F))
+       ("i" (lambda (&optional arg) (interactive "p") (sp-wrap-with-pair "/")))
        ("b" (ergo-surround #x2A))
        ("u" (ergo-surround #x5F))
        ("k" (ergo-surround #x2D)))
