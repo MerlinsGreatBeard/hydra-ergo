@@ -36,12 +36,14 @@
    :ID:       70aa02bf-39b5-4abb-9fe1-aef8a6c0a1ab
    :END:
  I'm using c for org-mode so far. In xah-keys it's used for copy or selecting which evil-mode handles for me instead.
+ I'm also adding some timer functions in here since it seems to fit with the organization/adm theme.
  #+BEGIN_SRC emacs-lisp :results silent
    (defhydra hydra-ergo-c-menu (:color blue)
      ("n" org-narrow-to-subtree)
      ("d" widen)
      ("i" hydra-ergo-org-download/body)
-     ("j" (org-brain-visualize (org-brain-entry-at-pt)))
+     ;; ("j" (org-brain-visualize (org-brain-entry-at-pt)))
+     ("j" hydra-ergo-org-rifle/body)
      ("k" (org-pomodoro-kill))
      ("o" (lambda ()
 	    (interactive)
@@ -165,6 +167,26 @@
        ("i" org-download-screenshot)
        ("d" org-download-delete))
    #+END_SRC 
+*** org-rifle
+    #+BEGIN_SRC emacs-lisp :results silent 
+      (defhydra hydra-ergo-org-rifle (:color blue)
+      ("j" helm-org-rifle "Show results from all open Org buffers")
+      ("a" helm-org-rifle-agenda-files "Show results from Org agenda files")
+      ("b" helm-org-rifle-current-buffer "Show results from current buffer")
+      ("d" helm-org-rifle-directories "Show results from selected directories; with prefix, recursively")
+      ("r" helm-org-rifle-files "Show results from selected files")
+      ("o" helm-org-rifle-org-directory "Show results from Org files in org-directory")
+      ("c" hydra-ergo-org-rifle-occur/body "Occur variants"))
+    #+END_SRC
+    #+BEGIN_SRC emacs-lisp :results silent 
+      (defhydra hydra-ergo-org-rifle-occur (:color blue)
+      ("j" helm-org-rifle-occur "Show results from all open Org buffers")
+      ("a" helm-org-rifle-occur-agenda-files "Show results from Org agenda files")
+      ("b" helm-org-rifle-occur-current-buffer "Show results from current buffer")
+      ("d" helm-org-rifle-occur-directories "Show results from selected directories; with prefix, recursively")
+      ("r" helm-org-rifle-occur-files "Show results from selected files")
+      ("o" helm-org-rifle-occur-org-directory "Show results from Org files in org-directory"))
+    #+END_SRC
 ** Help Functions
    :PROPERTIES:
    :ID:       ce94237c-1725-4a67-aba4-b1ce691d16aa
@@ -188,3 +210,5 @@
 	  (setq  org-pomodoro-length (string-to-number len))
 	nil)))
 #+END_SRC
+** TODO Todo
+- [ ] tea-timer
