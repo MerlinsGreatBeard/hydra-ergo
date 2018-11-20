@@ -21,6 +21,7 @@
   ("l" swiper :color blue)
   ("m" hydra-ergo-m-menu/body :color blue)
   ("s" hydra-ergo-s-menu/body :color blue)
+  ("t" hydra-ergo-t-menu/body :color blue)
   ("y" hydra-ergo-y-menu/body :color blue)
   ("c" hydra-ergo-c-menu/body :color blue)
   ("2" split-window-below :color blue)
@@ -148,6 +149,13 @@
        ("u" (ergo-surround #x5F))
        ("k" (ergo-surround #x2D)))
    #+END_SRC
+** t-menu
+   Time
+   #+BEGIN_SRC emacs-lisp :results silent 
+     (defhydra hydra-ergo-t-menu (:color blue)
+       "Timers"
+       ("j" tea-timer "tea-timer"))
+   #+END_SRC
 ** y-menu
    :PROPERTIES:
    :ID:       e2117bde-9f29-4a17-a6a3-a8bcb23ab7d5
@@ -210,5 +218,3 @@
 	  (setq  org-pomodoro-length (string-to-number len))
 	nil)))
 #+END_SRC
-** TODO Todo
-- [ ] tea-timer
