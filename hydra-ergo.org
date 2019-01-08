@@ -27,7 +27,7 @@
   ("2" split-window-below :color blue)
   ("3" split-window-right :color blue)
   ("4" delete-other-windows :color blue)
-  ("5" make-frame-command :color blue)
+  ("5" hydra-ergo-5-menu/body :color blue)
   ("0" delete-window :color blue)
   ("," fixup-whitespace :color blue))
   (global-set-key (kbd "M-SPC") 'hydra-ergo/body)
@@ -165,6 +165,13 @@
      ("d" aya-create)
      ("f" aya-expand))
  #+END_SRC
+** 5-menu
+   Frame commands. Many of those are on C-x <number> commands, hence 5-menu.
+  #+BEGIN_SRC emacs-lisp :results silent
+    (defhydra hydra-ergo-5-menu (:color blue)
+      ("j" make-frame-command)
+      ("k" delete-frame))
+  #+END_SRC 
 ** Subhydras
 *** org-download
     :PROPERTIES:
