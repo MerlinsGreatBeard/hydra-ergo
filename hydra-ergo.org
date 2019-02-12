@@ -140,16 +140,20 @@
    :ID:       257c02d8-e550-4c31-b796-5f5af560a03b
    :END:
    Format org text
+   +
    #+BEGIN_SRC emacs-lisp :results silent 
      (defhydra hydra-ergo-s-menu (:color blue)
        "Format Text org-mode-style"
-       ;; ("i" (ergo-surround #x2F))
-       ("i" (lambda (&optional arg) (interactive "p") (sp-wrap-with-pair "/")))
+       ("i" (ergo-surround #x2F))
+       ;; ("i" (lambda (&optional arg) (interactive "p") (sp-wrap-with-pair "/")))
        ("b" (ergo-surround #x2A))
        ("u" (ergo-surround #x5F))
-       ("k" (ergo-surround #x2D)))
+       ("k" (ergo-surround #x2b)))
    #+END_SRC
 ** t-menu
+   :PROPERTIES:
+   :ID:       dc0c47da-7e05-4ba9-88b1-9c0805246e36
+   :END:
    Time
    #+BEGIN_SRC emacs-lisp :results silent 
      (defhydra hydra-ergo-t-menu (:color blue)
@@ -166,6 +170,9 @@
      ("f" aya-expand))
  #+END_SRC
 ** 5-menu
+   :PROPERTIES:
+   :ID:       abddb871-062c-4b0d-99c4-e6f79940a4c1
+   :END:
    Frame commands. Many of those are on C-x <number> commands, hence 5-menu.
   #+BEGIN_SRC emacs-lisp :results silent
     (defhydra hydra-ergo-5-menu (:color blue)
@@ -183,6 +190,9 @@
        ("d" org-download-delete))
    #+END_SRC 
 *** org-rifle
+    :PROPERTIES:
+    :ID:       e8f825e4-1cd3-45aa-a089-1c62b839c5cd
+    :END:
     #+BEGIN_SRC emacs-lisp :results silent 
       (defhydra hydra-ergo-org-rifle (:color blue)
       ("j" helm-org-rifle "Show results from all open Org buffers")
@@ -191,7 +201,11 @@
       ("d" helm-org-rifle-directories "Show results from selected directories; with prefix, recursively")
       ("r" helm-org-rifle-files "Show results from selected files")
       ("o" helm-org-rifle-org-directory "Show results from Org files in org-directory")
-      ("c" hydra-ergo-org-rifle-occur/body "Occur variants"))
+      ("c" hydra-ergo-org-rifle-occur/body "Occur variants")
+      ("m" (lambda ()
+	     (interactive)
+	     (let ((choice (ivy-completing-read "Select: " '(".org$" ".org\\(_archive\\)?$"))))
+	       (setq helm-org-rifle-directories-filename-regexp choice))) "Choose regexp for dir filenames"))
     #+END_SRC
     #+BEGIN_SRC emacs-lisp :results silent 
       (defhydra hydra-ergo-org-rifle-occur (:color blue)
