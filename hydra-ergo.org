@@ -3,7 +3,7 @@
   :ID:       3c84cb21-89c4-4784-a166-207419370f2e
   :END:
 #+BEGIN_SRC emacs-lisp :results silent  
-  (defhydra hydra-ergo (evil-normal-state-map "SPC" evil-motion-state-map :color blue)
+  (defhydra hydra-ergo (evil-normal-state-map "SPC" :color blue)
   "hydra-ergo "
   ("a" execute-extended-command :color blue)
   ("d" hydra-ergo-d-menu/body :color blue)
@@ -31,6 +31,7 @@
   ("0" delete-window :color blue)
   ("," fixup-whitespace :color blue))
   (global-set-key (kbd "M-SPC") 'hydra-ergo/body)
+  (define-key evil-motion-state-map (kbd "SPC") 'hydra-ergo/body)
 #+END_SRC
 ** c-menu
    :PROPERTIES:
