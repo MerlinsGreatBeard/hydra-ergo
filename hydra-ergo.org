@@ -66,7 +66,7 @@
    (defhydra hydra-ergo-d-menu (:color blue)
      ("f" dired)
      ("j" dired-jump)
-     ("k" ranger))
+     ("k" hydra-ergo-ranger))
  #+END_SRC
 ** e-menu
    Encapsulate e.g. (),{} etc
@@ -221,22 +221,34 @@
    :PROPERTIES:
    :ID:       ce94237c-1725-4a67-aba4-b1ce691d16aa
    :END:
-#+BEGIN_SRC emacs-lisp :results silent
-  (defun ergo-surround (c)
-      (interactive)
-      (backward-char)
-      (evil-forward-WORD-end)
-      (forward-char)
-      (insert-char c)
-      (evil-backward-WORD-begin)
-      (insert-char c)
-      (evil-forward-WORD-end))
-#+END_SRC
-#+BEGIN_SRC emacs-lisp :results silent
-  (defun set-pomodoro-len-from-property ()
-    "Pomodoro length can be set by org property."
-    (let ((len (org-entry-get (point) "POMODORO")))
-      (if len
-	  (setq  org-pomodoro-length (string-to-number len))
-	nil)))
-#+END_SRC
+*** ergo-surround
+    #+BEGIN_SRC emacs-lisp :results silent
+    (defun ergo-surround (c)
+	(interactive)
+	(backward-char)
+	(evil-forward-WORD-end)
+	(forward-char)
+	(insert-char c)
+	(evil-backward-WORD-begin)
+	(insert-char c)
+	(evil-forward-WORD-end))
+    #+END_SRC
+*** pomodoro
+    #+BEGIN_SRC emacs-lisp :results silent
+    (defun set-pomodoro-len-from-property ()
+	"Pomodoro length can be set by org property."
+	(let ((len (org-entry-get (point) "POMODORO")))
+	(if len
+	    (setq  org-pomodoro-length (string-to-number len))
+	    nil)))
+    #+END_SRC
+*** ranger
+    open from selection
+    #+BEGIN_SRC emacs-lisp :results silent 
+      (defun hydra-ergo-ranger ()
+	"Try to open the selected region if there is one, otherwise just call ranger."
+	(interactive)
+	(if (region-active-p)
+	    (ranger (buffer-substring (region-beginning) (region-end)))
+	  (ranger)))
+    #+END_SRC
