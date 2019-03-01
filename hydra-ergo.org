@@ -46,7 +46,11 @@
      ("i" hydra-ergo-org-download/body)
      ;; ("j" (org-brain-visualize (org-brain-entry-at-pt)))
      ("j" hydra-ergo-org-rifle/body)
-     ("k" (org-pomodoro-kill))
+     ("k" ((lambda ()
+	     (if (not (org-clocking-p))
+		 (org-pomodoro-kill)
+	       (org-pomodoro-kill)
+	       (org-pomodoro-start :short-break)))))
      ("o" (lambda ()
 	    (interactive)
 	    (set-pomodoro-len-from-property)
@@ -222,6 +226,9 @@
    :ID:       ce94237c-1725-4a67-aba4-b1ce691d16aa
    :END:
 *** ergo-surround
+    :PROPERTIES:
+    :ID:       df4934fe-bbab-4bc5-949a-a8e7ca8b7b68
+    :END:
     #+BEGIN_SRC emacs-lisp :results silent
     (defun ergo-surround (c)
 	(interactive)
@@ -234,6 +241,9 @@
 	(evil-forward-WORD-end))
     #+END_SRC
 *** pomodoro
+    :PROPERTIES:
+    :ID:       719cde16-9e6f-4f42-857d-4ceccf1252b5
+    :END:
     #+BEGIN_SRC emacs-lisp :results silent
     (defun set-pomodoro-len-from-property ()
 	"Pomodoro length can be set by org property."
@@ -243,6 +253,9 @@
 	    nil)))
     #+END_SRC
 *** ranger
+    :PROPERTIES:
+    :ID:       dc55da17-d580-4e76-9a66-13307a71a1ce
+    :END:
     open from selection
     #+BEGIN_SRC emacs-lisp :results silent 
       (defun hydra-ergo-ranger ()
