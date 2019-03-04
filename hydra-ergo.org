@@ -163,7 +163,11 @@
    #+BEGIN_SRC emacs-lisp :results silent 
      (defhydra hydra-ergo-t-menu (:color blue)
        "Timers"
-       ("j" tea-timer "tea-timer"))
+       ("j" tea-timer "tea-timer")
+       ("k" (lambda ()
+	      (interactive)
+	      (org-pomodoro-start :short-break))))
+	"org-pomodoro-short-break"))
    #+END_SRC
 ** y-menu
    :PROPERTIES:
