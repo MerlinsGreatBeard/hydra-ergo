@@ -73,7 +73,7 @@
      ("k" hydra-ergo-ranger))
  #+END_SRC
 ** e-menu
-   Encapsulate e.g. (),{} etc
+   elisp
 ** i-menu 
    :PROPERTIES:
    :ID:       8b982e6c-4461-4a53-95ca-cf9d0ec9779d
@@ -167,16 +167,19 @@
        ("k" (lambda ()
 	      (interactive)
 	      (org-pomodoro-start :short-break))))
-	"org-pomodoro-short-break"))
    #+END_SRC
 ** y-menu
    :PROPERTIES:
    :ID:       e2117bde-9f29-4a17-a6a3-a8bcb23ab7d5
    :END:
+    yasnippets and yankpad
  #+BEGIN_SRC emacs-lisp :results silent 
    (defhydra hydra-ergo-y-menu (:color blue)
      ("d" aya-create)
-     ("f" aya-expand))
+     ("f" aya-expand)
+     ("m" yankpad-map)
+     ("e" yankpad-expand)
+     ("c" yankpad-set-category))
  #+END_SRC
 ** 5-menu
    :PROPERTIES:
@@ -268,4 +271,5 @@
 	(if (region-active-p)
 	    (ranger (buffer-substring (region-beginning) (region-end)))
 	  (ranger)))
-    #+END_SRC
+   #+END_SRC
+    
