@@ -58,6 +58,7 @@
      ("x" (org-cut-special))
      ("w" (org-copy-special))
      ("s" (org-sparse-tree))
+     ("f" (org-refile))
      ("y" (org-paste-special nil)))
  #+END_SRC
 ** d-menu_
