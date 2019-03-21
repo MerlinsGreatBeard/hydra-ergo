@@ -7,6 +7,7 @@
   "hydra-ergo "
   ("a" execute-extended-command :color blue)
   ("d" hydra-ergo-d-menu/body :color blue)
+  ("e" hydra-ergo-e-menu/body :color blue)
   ("f" ivy-switch-buffer :color blue)
   ("i" hydra-ergo-i-menu/body :color blue)
   ("o" (lambda ()
@@ -74,7 +75,10 @@
      ("k" hydra-ergo-ranger))
  #+END_SRC
 ** e-menu
-   elisp
+ #+BEGIN_SRC emacs-lisp :results silent 
+   (defhydra hydra-ergo-e-menu (:color blue)
+    ("j" quick-calc))
+ #+END_SRC
 ** i-menu 
    :PROPERTIES:
    :ID:       8b982e6c-4461-4a53-95ca-cf9d0ec9779d
