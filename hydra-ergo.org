@@ -75,6 +75,9 @@
      ("k" hydra-ergo-ranger))
  #+END_SRC
 ** e-menu
+   :PROPERTIES:
+   :ID:       4ef41070-8a97-42af-98f1-439ae6aa4ce9
+   :END:
  #+BEGIN_SRC emacs-lisp :results silent 
    (defhydra hydra-ergo-e-menu (:color blue)
     ("j" quick-calc))
@@ -142,6 +145,16 @@
    #+BEGIN_SRC emacs-lisp :results silent 
      (defhydra hydra-ergo-r-menu (:color blue)
        "r-menu"
+       ("1" (eyebrowse-switch-to-window-config-1))
+       ("2" (eyebrowse-switch-to-window-config-2))
+       ("3" (eyebrowse-switch-to-window-config-3))
+       ("4" (eyebrowse-switch-to-window-config-4))
+       ("5" (eyebrowse-switch-to-window-config-5))
+       ("6" (eyebrowse-switch-to-window-config-6))
+       ("7" (eyebrowse-switch-to-window-config-7))
+       ("8" (eyebrowse-switch-to-window-config-8))
+       ("9" (eyebrowse-switch-to-window-config-9))
+       ("0" (eyebrowse-switch-to-window-config-0))
        ("i" evil-numbers/inc-at-pt)
        ("d" evil-numbers/dec-at-pt))
    #+END_SRC
