@@ -31,9 +31,32 @@
   ("5" hydra-ergo-5-menu/body :color blue)
   ("0" delete-window :color blue)
   ("," fixup-whitespace :color blue))
-  (global-set-key (kbd "M-SPC") 'hydra-ergo/body)
-  (define-key evil-motion-state-map (kbd "SPC") 'hydra-ergo/body)
+  ;; (global-set-key (kbd "M-SPC") 'hydra-ergo/body)
+  ;; (define-key evil-motion-state-map (kbd "SPC") 'hydra-ergo/body)
 #+END_SRC
+   Create an intercept mode map for hydra-ergo. This will have a higher precedence than the normal and motion state maps
+   [[https://github.com/noctuid/evil-guide#unbinding-a-key][found here]] 
+   #+begin_src emacs-lisp :results silent
+     (defvar hydra-ergo-intercept-mode-map (make-sparse-keymap)
+     "High precedence keymap.")
+
+     (define-minor-mode hydra-ergo-intercept-mode
+     "Global minor mode for higher precedence evil keybindings."
+     :global t)
+
+     (hydra-ergo-intercept-mode)
+
+     (dolist (state '(normal motion))
+     (evil-make-intercept-map
+     ;; NOTE: This requires an evil version from 2018-03-20 or later
+     (evil-get-auxiliary-keymap hydra-ergo-intercept-mode-map state t t)
+     state))
+
+     (evil-define-key 'normal hydra-ergo-intercept-mode-map
+     (kbd "SPC") 'hydra-ergo/body)
+     (evil-define-key 'motion hydra-ergo-intercept-mode-map
+     (kbd "SPC") 'hydra-ergo/body)
+   #+end_src
 ** c-menu
    :PROPERTIES:
    :ID:       70aa02bf-39b5-4abb-9fe1-aef8a6c0a1ab
