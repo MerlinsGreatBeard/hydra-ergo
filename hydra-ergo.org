@@ -65,6 +65,7 @@
  I'm also adding some timer functions in here since it seems to fit with the organization/adm theme.
  #+BEGIN_SRC emacs-lisp :results silent
    (defhydra hydra-ergo-c-menu (:color blue)
+     ("e" org-journal-new-entry)
      ("n" org-narrow-to-subtree)
      ("d" widen)
      ("i" hydra-ergo-org-download/body)
