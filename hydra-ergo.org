@@ -208,7 +208,8 @@
        ("j" tea-timer "tea-timer")
        ("k" (lambda ()
 	      (interactive)
-	      (org-pomodoro-start :short-break))))
+	      (org-pomodoro-start :short-break))
+	      "pomodoro short break"))
    #+END_SRC
 ** y-menu
    :PROPERTIES:
