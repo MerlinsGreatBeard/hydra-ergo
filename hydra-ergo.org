@@ -209,7 +209,9 @@
        ("k" (lambda ()
 	      (interactive)
 	      (org-pomodoro-start :short-break))
-	      "pomodoro short break"))
+	"pomodoro short break")
+       ("o" chronos-add-timer "chronos-add-timer"))
+
    #+END_SRC
 ** y-menu
    :PROPERTIES:
