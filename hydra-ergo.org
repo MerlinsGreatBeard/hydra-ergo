@@ -24,6 +24,7 @@
   ("s" hydra-ergo-s-menu/body :color blue)
   ("t" hydra-ergo-t-menu/body :color blue)
   ("y" hydra-ergo-y-menu/body :color blue)
+  ("§" hydra-ergo-§-menu/body :color blue)
   ("c" hydra-ergo-c-menu/body :color blue)
   ("2" split-window-below :color blue)
   ("3" split-window-right :color blue)
@@ -226,6 +227,17 @@
      ("e" yankpad-expand "yankpad-expand")
      ("c" yankpad-set-category "yankpad-set-category"))
  #+END_SRC
+** §-menu
+   shell-commands
+   #+BEGIN_SRC emacs-lisp :results silent 
+     (defhydra hydra-ergo-§-menu (:color blue)
+       ("l" (lambda ()
+	      (interactive)
+	      (call-process "xrandr" nil nil nil "--output" "Virtual1" "--mode" "1920x1080_60.00")) "laptop")
+       ("d" (lambda ()
+	      (interactive)
+	      (call-process "xrandr" nil nil nil "--output" "Virtual1" "--mode" "1920x1200_60.00")) "docked"))
+   #+END_SRC
 ** 5-menu
    :PROPERTIES:
    :ID:       abddb871-062c-4b0d-99c4-e6f79940a4c1
