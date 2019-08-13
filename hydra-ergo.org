@@ -31,6 +31,7 @@
   ("4" delete-other-windows :color blue)
   ("5" hydra-ergo-5-menu/body :color blue)
   ("0" delete-window :color blue)
+  ("<" calendar :color blue)
   ("," fixup-whitespace :color blue))
   ;; (global-set-key (kbd "M-SPC") 'hydra-ergo/body)
   ;; (define-key evil-motion-state-map (kbd "SPC") 'hydra-ergo/body)
