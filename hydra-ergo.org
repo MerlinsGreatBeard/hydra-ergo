@@ -144,7 +144,7 @@
       ;; ("c" goto-char)
       ("d" mark-defun)
       ("e" list-matching-lines)
-      ("f" (switch-to-buffer (clone-indirect-buffer nil nil)))
+      ("f" (switch-to-buffer (clone-indirect-buffer nil nil)) "clone ind buf")
       ("i" delete-non-matching-lines)
       ("j" copy-to-register)
       ("l" insert-register)
