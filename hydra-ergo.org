@@ -6,6 +6,7 @@
     (defhydra hydra-ergo (evil-normal-state-map "SPC" :color blue)
     "hydra-ergo "
     ("a" execute-extended-command :color blue)
+
     ("d" hydra-ergo-d-menu/body :color blue)
     ("e" hydra-ergo-e-menu/body :color blue)
     ("f" ivy-switch-buffer :color blue)
@@ -35,7 +36,8 @@
     ("å" (lambda ()
 	   (interactive)
 	   (setq abbr-swe (not abbr-swe))
-	   (load "/mnt/hgfs/H/temp/my-abbrev.el")))
+	   (load "/home/olle/.emacs.d/lisp/my-abbrev.el")))
+    ("x" hydra-ergo-x-menu/body :color blue)
     ("," fixup-whitespace :color blue))
     ;; (global-set-key (kbd "M-SPC") 'hydra-ergo/body)
     ;; (define-key evil-motion-state-map (kbd "SPC") 'hydra-ergo/body)
@@ -219,6 +221,19 @@
        ("o" chronos-add-timer "chronos-add-timer"))
 
    #+END_SRC
+** x-menu
+  #+BEGIN_SRC emacs-lisp :results silent 
+    (defhydra hydra-ergo-x-menu (:color blue)
+      ("r" (lambda ()
+	     (interactive)
+	     (cond (centered-cursor-mode 
+		    (centered-cursor-mode 0)
+		    (hl-line-mode -1))
+		   (t (centered-cursor-mode)
+		      (hl-line-mode)
+		      (set-face-background hl-line-face "DarkGrey")
+		      (setq ccm-vpos 14))))))
+  #+END_SRC 
 ** y-menu
    :PROPERTIES:
    :ID:       e2117bde-9f29-4a17-a6a3-a8bcb23ab7d5
