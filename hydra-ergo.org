@@ -22,6 +22,7 @@
     ("k" evil-search-backward :color blue)
     ("l" swiper :color blue)
     ("m" hydra-ergo-m-menu/body :color blue)
+    ("n" swiper-thing-at-point :color blue)
     ("s" hydra-ergo-s-menu/body :color blue)
     ("t" hydra-ergo-t-menu/body :color blue)
     ("y" hydra-ergo-y-menu/body :color blue)
