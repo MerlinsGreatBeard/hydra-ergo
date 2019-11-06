@@ -347,7 +347,6 @@
 	"Try to open the selected region if there is one, otherwise just call ranger."
 	(interactive)
 	(if (region-active-p)
-	    (ranger (buffer-substring (region-beginning) (region-end)))
-	  (ranger)))
+	    (deer (buffer-substring (region-beginning) (region-end)))
+	  (deer)))
    #+END_SRC
-    
