@@ -276,7 +276,9 @@
     :END:
    #+BEGIN_SRC emacs-lisp :results silent
      (defhydra hydra-ergo-org-download (:color blue)
-       ("i" org-download-screenshot)
+       ("i" (lambda ()
+	      (interactive)
+	      (org-download-image "/mnt/hgfs/CTemp/temp.png")))
        ("d" org-download-delete))
    #+END_SRC 
 *** org-rifle
