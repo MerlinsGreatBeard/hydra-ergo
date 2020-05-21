@@ -81,6 +81,7 @@
      ;; ("j" (org-brain-visualize (org-brain-entry-at-pt)))
      ("j" hydra-ergo-org-rifle/body)
      ("k" (lambda ()
+	    (interactive)
 	     (if (not (org-clocking-p))
 		 (org-pomodoro-kill)
 	       (org-pomodoro-kill)
