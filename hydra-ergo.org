@@ -25,6 +25,7 @@
     ("n" swiper-thing-at-point :color blue)
     ("s" hydra-ergo-s-menu/body :color blue)
     ("t" hydra-ergo-t-menu/body :color blue)
+    ("T" hydra-ergo-cap-t-menu/body :color blue)
     ("y" hydra-ergo-y-menu/body :color blue)
     ("§" hydra-ergo-§-menu/body :color blue)
     ("c" hydra-ergo-c-menu/body :color blue)
@@ -227,6 +228,22 @@
 	"pomodoro short break")
        ("o" chronos-add-timer "chronos-add-timer"))
 
+   #+END_SRC
+** T-menu
+   #+BEGIN_SRC emacs-lisp :results silent 
+     (defhydra hydra-ergo-cap-t-menu (:color red)
+       "Theme Commands"
+       ("j" rand-theme-iterate "rand theme iterate")
+       ("k" rand-theme-iterate-backwards "rand theme iterate backwards")
+       ("f" rand-theme "rand theme")
+       ("r" reload-theme "reload-theme")
+       ("d" (add-to-list 'fav-dark-themes (car custom-enabled-themes)) "add to fav-dark")
+       ("l" (add-to-list 'fav-light-themes (car custom-enabled-themes)) "add to fav-light")
+       ("u" (add-to-list 'rand-theme-unwanted (car custom-enabled-themes)) "add to unwanted themes")
+       ("n" (lambda ()
+	      (interactive)
+	      (print (car custom-enabled-themes))) "show name of current theme")
+       ("q" nil "quit"))
    #+END_SRC
 ** x-menu
   #+BEGIN_SRC emacs-lisp :results silent 
