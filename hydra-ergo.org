@@ -38,7 +38,7 @@
   ("å" (lambda ()
 	 (interactive)
 	 (setq abbr-swe (not abbr-swe))
-	 (load "/home/olle/.emacs.d/lisp/my-abbrev.el")))
+	 (load "~/.emacs.d/lisp/my-abbrev.el")))
   ("x" hydra-ergo-x-menu/body :color blue)
   ("," fixup-whitespace :color blue))
   ;; (global-set-key (kbd "M-SPC") 'hydra-ergo/body)
@@ -355,6 +355,6 @@
 	"Try to open the selected region if there is one, otherwise just call ranger."
 	(interactive)
 	(if (region-active-p)
-	    (deer (buffer-substring (region-beginning) (region-end)))
-	  (deer)))
+	    (ranger (buffer-substring (region-beginning) (region-end)))
+	  (ranger)))
    #+END_SRC
