@@ -2,6 +2,7 @@
   :PROPERTIES:
   :ID:       3c84cb21-89c4-4784-a166-207419370f2e
   :END:
+** Top
 #+BEGIN_SRC emacs-lisp :results silent  
     (defhydra hydra-ergo (evil-normal-state-map "SPC" :color blue)
     "hydra-ergo "
@@ -231,14 +232,25 @@
    #+END_SRC
 ** T-menu
    #+BEGIN_SRC emacs-lisp :results silent 
+
+(defun save-theme-to-fav (group)
+  (let ((curr-theme (car custom-enabled-themes)))
+    (add-to-list (intern group) curr-theme)
+    (when (find-file "~/.emacs.d/hydra-ergo/fav-themes.org")
+      (hydra-ergo-add-var-orgfile group (symbol-name curr-theme)))))
+
      (defhydra hydra-ergo-cap-t-menu (:color red)
        "Theme Commands"
        ("j" rand-theme-iterate "rand theme iterate")
        ("k" rand-theme-iterate-backwards "rand theme iterate backwards")
        ("f" rand-theme "rand theme")
        ("r" reload-theme "reload-theme")
-       ("d" (add-to-list 'fav-dark-themes (car custom-enabled-themes)) "add to fav-dark")
-       ("l" (add-to-list 'fav-light-themes (car custom-enabled-themes)) "add to fav-light")
+       ("d" (progn
+	      (save-theme-to-fav "fav-dark-themes")
+	      (print "Theme added to fav-dark-themes")) "add to fav-dark")
+       ("l" (progn
+	      (save-theme-to-fav "fav-light-themes")
+	      (print "Theme added to fav-light-themes")) "add to fav-light")
        ("u" (add-to-list 'rand-theme-unwanted (car custom-enabled-themes)) "add to unwanted themes")
        ("n" (lambda ()
 	      (interactive)
@@ -333,6 +345,13 @@
    :PROPERTIES:
    :ID:       ce94237c-1725-4a67-aba4-b1ce691d16aa
    :END:
+*** org-database-helpers
+    #+BEGIN_SRC emacs-lisp :results silent
+(load "~/.emacs.d/hydra-ergo/hydra-ergo-org-db-helpers.el")
+()
+
+    #+end_src
+    
 *** ergo-surround
     :PROPERTIES:
     :ID:       df4934fe-bbab-4bc5-949a-a8e7ca8b7b68
