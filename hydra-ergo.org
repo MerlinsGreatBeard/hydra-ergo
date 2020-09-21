@@ -4,9 +4,9 @@
   :END:
 ** Top
 #+BEGIN_SRC emacs-lisp :results silent  
-    (defhydra hydra-ergo (evil-normal-state-map "SPC" :color blue)
-    "hydra-ergo "
-    ("a" execute-extended-command :color blue)
+  (defhydra hydra-ergo (evil-normal-state-map "SPC" :color blue)
+  "hydra-ergo "
+  ("a" execute-extended-command :color blue)
 
     ("d" hydra-ergo-d-menu/body :color blue)
     ("e" hydra-ergo-e-menu/body :color blue)
@@ -39,7 +39,7 @@
     ("å" (lambda ()
 	   (interactive)
 	   (setq abbr-swe (not abbr-swe))
-	   (load "/home/olle/.emacs.d/lisp/my-abbrev.el")))
+	   (load "~/.emacs.d/lisp/my-abbrev.el")))
     ("x" hydra-ergo-x-menu/body :color blue)
     ("," fixup-whitespace :color blue))
     ;; (global-set-key (kbd "M-SPC") 'hydra-ergo/body)
@@ -311,7 +311,9 @@
     :END:
    #+BEGIN_SRC emacs-lisp :results silent
      (defhydra hydra-ergo-org-download (:color blue)
-       ("i" org-download-screenshot)
+       ("i" (lambda ()
+	      (interactive)
+	      (org-download-image "/mnt/hgfs/CTemp/temp.png")))
        ("d" org-download-delete))
    #+END_SRC 
 *** org-rifle
@@ -392,4 +394,3 @@
 	    (ranger (buffer-substring (region-beginning) (region-end)))
 	  (ranger)))
    #+END_SRC
-    
