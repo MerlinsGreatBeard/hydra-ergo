@@ -233,29 +233,33 @@
 ** T-menu
    #+BEGIN_SRC emacs-lisp :results silent 
 
-(defun save-theme-to-fav (group)
+(defun save-theme-settings (group)
   (let ((curr-theme (car custom-enabled-themes)))
-    (add-to-list (intern group) curr-theme)
-    (when (find-file "~/.emacs.d/hydra-ergo/fav-themes.org")
-      (hydra-ergo-add-var-orgfile group (symbol-name curr-theme)))))
+    (if (listp (intern group))
+	(add-to-list (intern group) curr-theme)
+      (set (intern group) (list curr-theme)))
+    (when (file-exists-p hydra-ergo-fav-themes-fname)
+      (hydra-ergo-add-var-orgfile hydra-ergo-fav-themes-fname group (symbol-name curr-theme)))))
 
-     (defhydra hydra-ergo-cap-t-menu (:color red)
-       "Theme Commands"
-       ("j" rand-theme-iterate "rand theme iterate")
-       ("k" rand-theme-iterate-backwards "rand theme iterate backwards")
-       ("f" rand-theme "rand theme")
-       ("r" reload-theme "reload-theme")
-       ("d" (progn
-	      (save-theme-to-fav "fav-dark-themes")
-	      (print "Theme added to fav-dark-themes")) "add to fav-dark")
-       ("l" (progn
-	      (save-theme-to-fav "fav-light-themes")
-	      (print "Theme added to fav-light-themes")) "add to fav-light")
-       ("u" (add-to-list 'rand-theme-unwanted (car custom-enabled-themes)) "add to unwanted themes")
-       ("n" (lambda ()
-	      (interactive)
-	      (print (car custom-enabled-themes))) "show name of current theme")
-       ("q" nil "quit"))
+(defhydra hydra-ergo-cap-t-menu (:color red)
+  "Theme Commands"
+  ("j" rand-theme-iterate "rand theme iterate")
+  ("k" rand-theme-iterate-backwards "rand theme iterate backwards")
+  ("f" rand-theme "rand theme")
+  ("r" reload-theme "reload-theme")
+  ("d" (progn
+	 (save-theme-settings "fav-dark-themes")
+	 (print "Theme added to fav-dark-themes")) "add to fav-dark")
+  ("l" (progn
+	 (save-theme-settings "fav-light-themes")
+	 (print "Theme added to fav-light-themes")) "add to fav-light")
+  ("u" (progn
+	 (save-theme-settings "hydra-ergo-unwanted-themes")
+	 (print "Theme added to unwanted-themes")) "add to unwanted themes")
+  ("n" (lambda ()
+	 (interactive)
+	 (print (car custom-enabled-themes))) "show name of current theme")
+  ("q" nil "quit"))
    #+END_SRC
 ** x-menu
   #+BEGIN_SRC emacs-lisp :results silent 
@@ -349,11 +353,12 @@
    :END:
 *** org-database-helpers
     #+BEGIN_SRC emacs-lisp :results silent
-(load "~/.emacs.d/hydra-ergo/hydra-ergo-org-db-helpers.el")
-()
-
+(setq hydra-ergo-dir "/home/olle/.emacs.d/hydra-ergo/")
+(load (concat hydra-ergo-dir "hydra-ergo-org-db-helpers.el"))
+(setq hydra-ergo-fav-themes-fname (concat
+			 hydra-ergo-dir "fav-themes.org"))
+(hydra-ergo-org-to-vars hydra-ergo-fav-themes-fname)
     #+end_src
-    
 *** ergo-surround
     :PROPERTIES:
     :ID:       df4934fe-bbab-4bc5-949a-a8e7ca8b7b68
