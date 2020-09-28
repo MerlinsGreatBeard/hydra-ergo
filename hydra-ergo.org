@@ -1,3 +1,4 @@
+#+STARTUP: content
 * Hydra-Ergo Some ergonomic shortcuts for common uses.
   :PROPERTIES:
   :ID:       3c84cb21-89c4-4784-a166-207419370f2e
@@ -235,13 +236,13 @@
 
 (defun save-theme-settings (group)
   (let ((curr-theme (car custom-enabled-themes)))
-    (if (listp (intern group))
+    (if (listp (symbol-value (intern group)))
 	(add-to-list (intern group) curr-theme)
       (set (intern group) (list curr-theme)))
     (when (file-exists-p hydra-ergo-fav-themes-fname)
-      (hydra-ergo-add-var-orgfile hydra-ergo-fav-themes-fname group (symbol-name curr-theme)))))
-
-(defhydra hydra-ergo-cap-t-menu (:color red)
+      (hydra-ergo-add-var-orgfile hydra-ergo-fav-themes-fname group (symbol-name
+								     curr-theme)))))
+(defhydra hydra-ergo-cap-t-menu (:color red :post (set-fringe-style 0))
   "Theme Commands"
   ("j" rand-theme-iterate "rand theme iterate")
   ("k" rand-theme-iterate-backwards "rand theme iterate backwards")
@@ -254,7 +255,7 @@
 	 (save-theme-settings "fav-light-themes")
 	 (print "Theme added to fav-light-themes")) "add to fav-light")
   ("u" (progn
-	 (save-theme-settings "hydra-ergo-unwanted-themes")
+	 (save-theme-settings "rand-theme-unwanted")
 	 (print "Theme added to unwanted-themes")) "add to unwanted themes")
   ("n" (lambda ()
 	 (interactive)
@@ -352,7 +353,8 @@
    :ID:       ce94237c-1725-4a67-aba4-b1ce691d16aa
    :END:
 *** org-database-helpers
-    #+BEGIN_SRC emacs-lisp :results silent
+    Running this in config.org instead under rand-theme header.
+    #+BEGIN_SRC emacs-lisp :results silent tangle:no
 (setq hydra-ergo-dir "/home/olle/.emacs.d/hydra-ergo/")
 (load (concat hydra-ergo-dir "hydra-ergo-org-db-helpers.el"))
 (setq hydra-ergo-fav-themes-fname (concat

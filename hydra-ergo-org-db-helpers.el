@@ -10,6 +10,7 @@ from top headline containing at list with names of all subheadings"
 	(move-end-of-line nil)
 	(if (equal (car (org-heading-components)) 1)
 	    (progn
+	      (org-show-children)
 	      (when vname
 		(set (intern vname) group)
 		(setq group nil))
