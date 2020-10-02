@@ -77,6 +77,7 @@
  I'm also adding some timer functions in here since it seems to fit with the organization/adm theme.
  #+BEGIN_SRC emacs-lisp :results silent
    (defhydra hydra-ergo-c-menu (:color blue)
+     ("b" hydra-ergo-org-brain/body)
      ("e" org-journal-new-entry)
      ("n" org-narrow-to-subtree)
      ("d" widen)
@@ -348,19 +349,23 @@
       ("r" helm-org-rifle-occur-files "Show results from selected files")
       ("o" helm-org-rifle-occur-org-directory "Show results from Org files in org-directory"))
     #+END_SRC
+*** org-brain
+    #+BEGIN_SRC emacs-lisp :results silent 
+      (defun hydra-ergo-swbrain (brain)
+	(setq hydra-ergo-chosen-brain (cdr (assoc brain org-brains)))
+	(setq org-id-locations-file (cdr hydra-ergo-chosen-brain))
+	(setq org-brain-path (car hydra-ergo-chosen-brain)))
+      (defhydra hydra-ergo-brain-switch (:color blue)
+	("c" (hydra-ergo-swbrain 'c))
+	("h" (hydra-ergo-swbrain 'h)))
+      (defhydra hydra-ergo-org-brain (:color blue)
+	("b" org-brain-visualize "org-brain-visualize")
+	("s" hydra-ergo-brain-switch/body "switch brain"))
+    #+END_SRC
 ** Help Functions
    :PROPERTIES:
    :ID:       ce94237c-1725-4a67-aba4-b1ce691d16aa
    :END:
-*** org-database-helpers
-    Running this in config.org instead under rand-theme header.
-    #+BEGIN_SRC emacs-lisp :results silent tangle:no
-(setq hydra-ergo-dir "/home/olle/.emacs.d/hydra-ergo/")
-(load (concat hydra-ergo-dir "hydra-ergo-org-db-helpers.el"))
-(setq hydra-ergo-fav-themes-fname (concat
-			 hydra-ergo-dir "fav-themes.org"))
-(hydra-ergo-org-to-vars hydra-ergo-fav-themes-fname)
-    #+end_src
 *** ergo-surround
     :PROPERTIES:
     :ID:       df4934fe-bbab-4bc5-949a-a8e7ca8b7b68
@@ -401,3 +406,12 @@
 	    (ranger (buffer-substring (region-beginning) (region-end)))
 	  (ranger)))
    #+END_SRC
+*** org-database-helpers
+    Running this in config.org instead under rand-theme header.
+    #+BEGIN_SRC emacs-lisp :results silent tangle:no
+      ;; (setq hydra-ergo-dir "/home/olle/.emacs.d/hydra-ergo/")
+      ;; (load (concat hydra-ergo-dir "hydra-ergo-org-db-helpers.el"))
+      ;; (setq hydra-ergo-fav-themes-fname (concat
+      ;; 			 hydra-ergo-dir "fav-themes.org"))
+      ;; (hydra-ergo-org-to-vars hydra-ergo-fav-themes-fname)
+    #+end_src
