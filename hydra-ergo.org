@@ -353,8 +353,14 @@
     #+BEGIN_SRC emacs-lisp :results silent 
       (defun hydra-ergo-swbrain (brain)
 	(setq hydra-ergo-chosen-brain (cdr (assoc brain org-brains)))
-	(setq org-id-locations-file (cdr hydra-ergo-chosen-brain))
-	(setq org-brain-path (car hydra-ergo-chosen-brain)))
+	(setq org-id-locations-file (convert-standard-filename (car (cdr hydra-ergo-chosen-brain))))
+	;; Avoid adding locations from the old brain to the new one 
+	(setq org-id-locations nil)
+	;; hmm are we removing some important locations here?  
+	(setq org-id-files nil)
+	(org-brain-switch-brain (car hydra-ergo-chosen-brain))
+	;; (setq org-brain-path (car hydra-ergo-chosen-brain))
+	)
       (defhydra hydra-ergo-brain-switch (:color blue)
 	("c" (hydra-ergo-swbrain 'c))
 	("h" (hydra-ergo-swbrain 'h)))
