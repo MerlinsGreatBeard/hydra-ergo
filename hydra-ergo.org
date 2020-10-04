@@ -353,10 +353,23 @@
     #+BEGIN_SRC emacs-lisp :results silent 
       (defun hydra-ergo-swbrain (brain)
 	(setq hydra-ergo-chosen-brain (cdr (assoc brain org-brains)))
+	;; would rather keep using one file as to not miss other files
+	;; one option is to :
+	;; add advice to org-id-locations-save or load that goes through org-id-locations-file
+	;; and replaces paths to wrong brain with default one.
+	;; see func below for open and replace    
+
+;; (defun foo ()
+;;   (find-file "/home/olle/Dokument/org/foobar.org")
+;;   (goto-line 0)
+;;   (while (re-search-forward "foo[ \\t]+bar" nil t)
+;;     (replace-match "foobar" nil nil))
+;;   (save-buffer))
+
 	(setq org-id-locations-file (convert-standard-filename (car (cdr hydra-ergo-chosen-brain))))
-	;; Avoid adding locations from the old brain to the new one 
-	(setq org-id-locations nil)
 	;; hmm are we removing some important locations here?  
+	;; replace with function that removes files from other brain       
+	;; see cl-remove-if 
 	(setq org-id-files nil)
 	(org-brain-switch-brain (car hydra-ergo-chosen-brain))
 	;; (setq org-brain-path (car hydra-ergo-chosen-brain))
