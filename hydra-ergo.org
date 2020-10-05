@@ -351,35 +351,28 @@
     #+END_SRC
 *** org-brain
     #+BEGIN_SRC emacs-lisp :results silent 
-      (defun hydra-ergo-swbrain (brain)
-	(setq hydra-ergo-chosen-brain (cdr (assoc brain org-brains)))
-	;; would rather keep using one file as to not miss other files
-	;; one option is to :
-	;; add advice to org-id-locations-save or load that goes through org-id-locations-file
-	;; and replaces paths to wrong brain with default one.
-	;; see func below for open and replace    
-
-;; (defun foo ()
-;;   (find-file "/home/olle/Dokument/org/foobar.org")
-;;   (goto-line 0)
-;;   (while (re-search-forward "foo[ \\t]+bar" nil t)
-;;     (replace-match "foobar" nil nil))
-;;   (save-buffer))
-
-	(setq org-id-locations-file (convert-standard-filename (car (cdr hydra-ergo-chosen-brain))))
-	;; hmm are we removing some important locations here?  
-	;; replace with function that removes files from other brain       
-	;; see cl-remove-if 
-	(setq org-id-files nil)
-	(org-brain-switch-brain (car hydra-ergo-chosen-brain))
-	;; (setq org-brain-path (car hydra-ergo-chosen-brain))
-	)
-      (defhydra hydra-ergo-brain-switch (:color blue)
-	("c" (hydra-ergo-swbrain 'c))
-	("h" (hydra-ergo-swbrain 'h)))
-      (defhydra hydra-ergo-org-brain (:color blue)
-	("b" org-brain-visualize "org-brain-visualize")
-	("s" hydra-ergo-brain-switch/body "switch brain"))
+	  (defun hydra-ergo-swbrain (brain)
+	    (setq hydra-ergo-chosen-brain (cdr (assoc brain org-brains)))
+	    ;; (setq org-id-locations-file (convert-standard-filename (car (cdr hydra-ergo-chosen-brain))))
+	    ;; hmm are we removing some important locations here?  
+	    ;; replace with function that removes files from other brain       
+	    ;; see cl-remove-if 
+	    (setq org-id-files 
+		  (cl-remove-if (lambda (file)
+				  (string-match org-brain-pattern file)) org-id-files))
+	    (org-brain-switch-brain hydra-ergo-chosen-brain)
+	    ;; Mark this brain to be used on next startup 
+	    ;; Since org-id-update-id-locations() will save the new file/id associations for the new brain to be used on next startup.
+	    (with-temp-file "~/.emacs.d/emacs-current-brain"
+	      (insert org-brain-path))
+	    ;; (setq org-brain-path (car hydra-ergo-chosen-brain))
+	    )
+	  (defhydra hydra-ergo-brain-switch (:color blue)
+	    ("c" (hydra-ergo-swbrain 'c))
+	    ("h" (hydra-ergo-swbrain 'h)))
+	  (defhydra hydra-ergo-org-brain (:color blue)
+	    ("b" org-brain-visualize "org-brain-visualize")
+	    ("s" hydra-ergo-brain-switch/body "switch brain"))
     #+END_SRC
 ** Help Functions
    :PROPERTIES:
