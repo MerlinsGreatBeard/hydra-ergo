@@ -234,7 +234,6 @@
    #+END_SRC
 ** T-menu
    #+BEGIN_SRC emacs-lisp :results silent 
-
 (defun save-theme-settings (group)
   (let ((curr-theme (car custom-enabled-themes)))
     (if (listp (symbol-value (intern group)))
