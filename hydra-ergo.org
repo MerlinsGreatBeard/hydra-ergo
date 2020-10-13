@@ -86,10 +86,10 @@
      ("j" hydra-ergo-org-rifle/body)
      ("k" (lambda ()
 	    (interactive)
-	     (if (not (org-clocking-p))
-		 (org-pomodoro-kill)
-	       (org-pomodoro-kill)
-	       (org-pomodoro-start :short-break))))
+	    (if (not (org-clocking-p))
+		(org-pomodoro-kill)
+	      (org-pomodoro-kill)
+	      (org-pomodoro-start :short-break))))
      ("l" (lambda ()
 	    (interactive)
 	    (org-time-stamp-inactive '(16))
@@ -102,7 +102,8 @@
      ("w" (org-copy-special))
      ("s" (org-sparse-tree))
      ("f" (org-refile))
-     ("y" (org-paste-special nil)))
+     ("y" (org-paste-special nil))
+     ("q" (org-ql-menu/body) "org-ql menu"))
  #+END_SRC
 ** d-menu_
    :PROPERTIES:
@@ -198,6 +199,7 @@
        ("8" (eyebrowse-switch-to-window-config-8))
        ("9" (eyebrowse-switch-to-window-config-9))
        ("0" (eyebrowse-switch-to-window-config-0))
+       ("n" (eyebrowse-rename-window-config))
        ("i" evil-numbers/inc-at-pt)
        ("d" evil-numbers/dec-at-pt))
    #+END_SRC
@@ -373,6 +375,7 @@
 	    ("b" org-brain-visualize "org-brain-visualize")
 	    ("s" hydra-ergo-brain-switch/body "switch brain"))
     #+END_SRC
+*** org-ql
 ** Help Functions
    :PROPERTIES:
    :ID:       ce94237c-1725-4a67-aba4-b1ce691d16aa

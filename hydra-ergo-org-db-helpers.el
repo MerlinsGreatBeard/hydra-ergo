@@ -21,7 +21,7 @@ from top headline containing at list with names of all subheadings"
 	    (set (intern vname) group)
 	    (setq group nil))
 	  (setq vname (current-word)))
-      (push (current-word) group)))
+      (push (make-symbol(current-word)) group)))
     
 (defun hydra-ergo-add-var-orgfile (fname parent entry)
   (find-file fname)
