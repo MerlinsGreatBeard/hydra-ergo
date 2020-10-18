@@ -249,7 +249,7 @@
   ("j" rand-theme-iterate "rand theme iterate")
   ("k" rand-theme-iterate-backwards "rand theme iterate backwards")
   ("f" rand-theme "rand theme")
-  ("r" reload-theme "reload-theme")
+  ("r" (reload-theme) "reload-theme")
   ("d" (progn
 	 (save-theme-settings "fav-dark-themes")
 	 (print "Theme added to fav-dark-themes")) "add to fav-dark")
