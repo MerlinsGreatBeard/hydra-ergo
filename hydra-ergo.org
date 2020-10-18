@@ -11,7 +11,7 @@
 
     ("d" hydra-ergo-d-menu/body :color blue)
     ("e" hydra-ergo-e-menu/body :color blue)
-    ("f" ivy-switch-buffer :color blue)
+    ("f" switch-to-buffer :color blue)
     ("i" hydra-ergo-i-menu/body :color blue)
     ("o" (lambda ()
 	    (interactive)
