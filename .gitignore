@@ -1,3 +1,4 @@
 /fav-themes.org
 *.el~
 *.org~
+/.gitignore~
