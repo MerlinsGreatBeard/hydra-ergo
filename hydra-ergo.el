@@ -1,10 +1,3 @@
-#+STARTUP: content
-* Hydra-Ergo Some ergonomic shortcuts for common uses.
-  :PROPERTIES:
-  :ID:       3c84cb21-89c4-4784-a166-207419370f2e
-  :END:
-** Top
-#+BEGIN_SRC emacs-lisp :results silent  
   (defhydra hydra-ergo (evil-normal-state-map "SPC" :color blue)
   "hydra-ergo "
   ("a" execute-extended-command :color blue)
@@ -18,7 +11,7 @@
 	    (other-window 1)
 	    (hydra-ergo-o-menu/body)) :color blue)
     ("r" hydra-ergo-r-menu/body :color blue)
-    ("๖" save-buffer :color blue)
+    ("รถ" save-buffer :color blue)
     ("w" ace-window :color blue)
     ("j" evil-search-forward :color blue)
     ("k" evil-search-backward :color blue)
@@ -29,7 +22,7 @@
     ("t" hydra-ergo-t-menu/body :color blue)
     ("T" hydra-ergo-cap-t-menu/body :color blue)
     ("y" hydra-ergo-y-menu/body :color blue)
-    ("ง" hydra-ergo-ง-menu/body :color blue)
+    ("ยง" hydra-ergo-ยง-menu/body :color blue)
     ("c" hydra-ergo-c-menu/body :color blue)
     ("2" split-window-below :color blue)
     ("3" split-window-right :color blue)
@@ -37,7 +30,7 @@
     ("5" hydra-ergo-5-menu/body :color blue)
     ("0" delete-window :color blue)
     ("<" calendar :color blue)
-    ("ๅ" (lambda ()
+    ("รฅ" (lambda ()
 	   (interactive)
 	   (setq abbr-swe (not abbr-swe))
 	   (load "~/.emacs.d/lisp/my-abbrev.el")))
@@ -45,10 +38,7 @@
     ("," fixup-whitespace :color blue))
     ;; (global-set-key (kbd "M-SPC") 'hydra-ergo/body)
     ;; (define-key evil-motion-state-map (kbd "SPC") 'hydra-ergo/body)
-#+END_SRC
-   Create an intercept mode map for hydra-ergo. This will have a higher precedence than the normal and motion state maps
-   [[https://github.com/noctuid/evil-guide#unbinding-a-key][found here]] 
-   #+begin_src emacs-lisp :results silent
+
      (defvar hydra-ergo-intercept-mode-map (make-sparse-keymap)
      "High precedence keymap.")
 
@@ -68,14 +58,7 @@
      (kbd "SPC") 'hydra-ergo/body)
      (evil-define-key 'motion hydra-ergo-intercept-mode-map
      (kbd "SPC") 'hydra-ergo/body)
-   #+end_src
-** c-menu
-   :PROPERTIES:
-   :ID:       70aa02bf-39b5-4abb-9fe1-aef8a6c0a1ab
-   :END:
- I'm using c for org-mode so far. In xah-keys it's used for copy or selecting which evil-mode handles for me instead.
- I'm also adding some timer functions in here since it seems to fit with the organization/adm theme.
- #+BEGIN_SRC emacs-lisp :results silent
+
    (defhydra hydra-ergo-c-menu (:color blue)
      ("b" hydra-ergo-org-brain/body)
      ("e" org-journal-new-entry)
@@ -104,47 +87,22 @@
      ("f" (org-refile))
      ("y" (org-paste-special nil))
      ("q" (org-ql-menu/body) "org-ql menu"))
- #+END_SRC
-** d-menu_
-   :PROPERTIES:
-   :ID:       b9e34c0b-1b1a-4f90-a42e-a07994ddf827
-   :END:
- I can't find the dired command in xah-fly-keys and since the "d" key is bound to things already 
- handled by vim I'll use d-menu as a dired-keymap
- #+BEGIN_SRC emacs-lisp :results silent 
+
    (defhydra hydra-ergo-d-menu (:color blue)
      ("f" dired)
      ("j" dired-jump)
      ("k" hydra-ergo-ranger))
- #+END_SRC
-** e-menu
-   :PROPERTIES:
-   :ID:       4ef41070-8a97-42af-98f1-439ae6aa4ce9
-   :END:
- #+BEGIN_SRC emacs-lisp :results silent 
+
    (defhydra hydra-ergo-e-menu (:color blue)
     ("j" quick-calc))
- #+END_SRC
-** i-menu 
-   :PROPERTIES:
-   :ID:       8b982e6c-4461-4a53-95ca-cf9d0ec9779d
-   :END:
- #+BEGIN_SRC emacs-lisp :results silent
+
    (defhydra hydra-ergo-i-menu (:color blue)
 	   "i-menu"
-	   ("f" find-file)
-	   ("w" burly-bookmark-windows)
+	   ("e" find-file)
 	   ("o" bookmark-jump)
 	   ("p" bookmark-set)
 	   ("i" bookmark-bmenu-list))
- #+END_SRC
-** m-menu
-   :PROPERTIES:
-   :ID:       7cab08df-e421-4331-b64b-6c0a50727245
-   :END:
- Copied from the xah-fly-t-keymap. k-map for qwerty.
- Replace with buffer functions over time.
- #+BEGIN_SRC emacs-lisp :results silent 
+
    (defhydra hydra-ergo-m-menu (:color blue)
       ;; ("SPC" xah-clean-whitespace)
       ;; ("TAB" move-to-column)
@@ -172,21 +130,10 @@
       ("u" delete-matching-lines)
       ;; ("w" xah-next-window-or-frame)
       ("y" delete-duplicate-lines))
- #+END_SRC
-** o-menu
-   :PROPERTIES:
-   :ID:       fd2e6082-b530-4572-9bac-74fa80fee2ac
-   :END:
- #+BEGIN_SRC emacs-lisp :results silent
+
  (defhydra hydra-ergo-o-menu (:color red)
 	 ("o" other-window :color red))
- #+END_SRC
-** r-menu
-   :PROPERTIES:
-   :ID:       5f95bea7-bd96-4edc-b415-e87fad0d23fe
-   :END:
-   Register and logical operations.
-   #+BEGIN_SRC emacs-lisp :results silent 
+
      (defhydra hydra-ergo-r-menu (:color blue)
        "r-menu"
        ("k" eyebrowse-close-window-config)
@@ -203,14 +150,7 @@
        ("n" eyebrowse-rename-window-config "rename-window")
        ("i" evil-numbers/inc-at-pt)
        ("d" evil-numbers/dec-at-pt))
-   #+END_SRC
-** s-menu
-   :PROPERTIES:
-   :ID:       257c02d8-e550-4c31-b796-5f5af560a03b
-   :END:
-   Format org text
-   +
-   #+BEGIN_SRC emacs-lisp :results silent 
+
      (defhydra hydra-ergo-s-menu (:color blue)
        "Format Text org-mode-style"
        ("i" (ergo-surround #x2F))
@@ -218,13 +158,7 @@
        ("b" (ergo-surround #x2A))
        ("u" (ergo-surround #x5F))
        ("k" (ergo-surround #x2b)))
-   #+END_SRC
-** t-menu
-   :PROPERTIES:
-   :ID:       dc0c47da-7e05-4ba9-88b1-9c0805246e36
-   :END:
-   Time
-   #+BEGIN_SRC emacs-lisp :results silent 
+
      (defhydra hydra-ergo-t-menu (:color blue)
        "Timers"
        ("j" tea-timer "tea-timer")
@@ -234,9 +168,6 @@
 	"pomodoro short break")
        ("o" chronos-add-timer "chronos-add-timer"))
 
-   #+END_SRC
-** T-menu
-   #+BEGIN_SRC emacs-lisp :results silent 
 (defun save-theme-settings (group)
   (let ((curr-theme (car custom-enabled-themes)))
     (if (listp (symbol-value (intern group)))
@@ -264,9 +195,7 @@
 	 (interactive)
 	 (print (car custom-enabled-themes))) "show name of current theme")
   ("q" nil "quit"))
-   #+END_SRC
-** x-menu
-  #+BEGIN_SRC emacs-lisp :results silent 
+
     (defhydra hydra-ergo-x-menu (:color blue)
       ("r" (lambda ()
 	     (interactive)
@@ -277,58 +206,32 @@
 		      (hl-line-mode)
 		      (set-face-background hl-line-face "DarkGrey")
 		      (setq ccm-vpos 14))))))
-  #+END_SRC 
-** y-menu
-   :PROPERTIES:
-   :ID:       e2117bde-9f29-4a17-a6a3-a8bcb23ab7d5
-   :END:
-    yasnippets and yankpad
- #+BEGIN_SRC emacs-lisp :results silent 
+
    (defhydra hydra-ergo-y-menu (:color blue)
      ("d" aya-create "aya-create")
      ("f" aya-expand "aya-expand")
      ("m" yankpad-map "yankpad-map")
      ("e" yankpad-expand "yankpad-expand")
      ("c" yankpad-set-category "yankpad-set-category"))
- #+END_SRC
-** ง-menu
-   shell-commands
-   #+BEGIN_SRC emacs-lisp :results silent 
-     (defhydra hydra-ergo-ง-menu (:color blue)
+
+     (defhydra hydra-ergo-ยง-menu (:color blue)
        ("l" (lambda ()
 	      (interactive)
 	      (call-process "xrandr" nil nil nil "--output" "Virtual1" "--mode" "1920x1080_60.00")) "laptop")
        ("d" (lambda ()
 	      (interactive)
 	      (call-process "xrandr" nil nil nil "--output" "Virtual1" "--mode" "1920x1200_60.00")) "docked"))
-   #+END_SRC
-** 5-menu
-   :PROPERTIES:
-   :ID:       abddb871-062c-4b0d-99c4-e6f79940a4c1
-   :END:
-   Frame commands. Many of those are on C-x <number> commands, hence 5-menu.
-  #+BEGIN_SRC emacs-lisp :results silent
+
     (defhydra hydra-ergo-5-menu (:color blue)
       ("j" make-frame-command)
       ("k" delete-frame))
-  #+END_SRC 
-** Subhydras
-*** org-download
-    :PROPERTIES:
-    :ID:       8c65b7bf-859e-403c-ace9-7b1b9ccff70c
-    :END:
-   #+BEGIN_SRC emacs-lisp :results silent
+
      (defhydra hydra-ergo-org-download (:color blue)
        ("i" (lambda ()
 	      (interactive)
 	      (org-download-image "/mnt/hgfs/CTemp/temp.png")))
        ("d" org-download-delete))
-   #+END_SRC 
-*** org-rifle
-    :PROPERTIES:
-    :ID:       e8f825e4-1cd3-45aa-a089-1c62b839c5cd
-    :END:
-    #+BEGIN_SRC emacs-lisp :results silent 
+
       (defhydra hydra-ergo-org-rifle (:color blue)
       ("j" helm-org-rifle "Show results from all open Org buffers")
       ("a" helm-org-rifle-agenda-files "Show results from Org agenda files")
@@ -341,8 +244,7 @@
 	     (interactive)
 	     (let ((choice (ivy-completing-read "Select: " '(".org$" ".org\\(_archive\\)?$"))))
 	       (setq helm-org-rifle-directories-filename-regexp choice))) "Choose regexp for dir filenames"))
-    #+END_SRC
-    #+BEGIN_SRC emacs-lisp :results silent 
+
       (defhydra hydra-ergo-org-rifle-occur (:color blue)
       ("j" helm-org-rifle-occur "Show results from all open Org buffers")
       ("a" helm-org-rifle-occur-agenda-files "Show results from Org agenda files")
@@ -350,9 +252,7 @@
       ("d" helm-org-rifle-occur-directories "Show results from selected directories; with prefix, recursively")
       ("r" helm-org-rifle-occur-files "Show results from selected files")
       ("o" helm-org-rifle-occur-org-directory "Show results from Org files in org-directory"))
-    #+END_SRC
-*** org-brain
-    #+BEGIN_SRC emacs-lisp :results silent 
+
 	  (defun hydra-ergo-swbrain (brain)
 	    (setq hydra-ergo-chosen-brain (cdr (assoc brain org-brains)))
 	    ;; (setq org-id-locations-file (convert-standard-filename (car (cdr hydra-ergo-chosen-brain))))
@@ -375,17 +275,7 @@
 	  (defhydra hydra-ergo-org-brain (:color blue)
 	    ("b" org-brain-visualize "org-brain-visualize")
 	    ("s" hydra-ergo-brain-switch/body "switch brain"))
-    #+END_SRC
-*** org-ql
-** Help Functions
-   :PROPERTIES:
-   :ID:       ce94237c-1725-4a67-aba4-b1ce691d16aa
-   :END:
-*** ergo-surround
-    :PROPERTIES:
-    :ID:       df4934fe-bbab-4bc5-949a-a8e7ca8b7b68
-    :END:
-    #+BEGIN_SRC emacs-lisp :results silent
+
     (defun ergo-surround (c)
 	(interactive)
 	(backward-char)
@@ -395,38 +285,23 @@
 	(evil-backward-WORD-begin)
 	(insert-char c)
 	(evil-forward-WORD-end))
-    #+END_SRC
-*** pomodoro
-    :PROPERTIES:
-    :ID:       719cde16-9e6f-4f42-857d-4ceccf1252b5
-    :END:
-    #+BEGIN_SRC emacs-lisp :results silent
+
     (defun set-pomodoro-len-from-property ()
 	"Pomodoro length can be set by org property."
 	(let ((len (org-entry-get (point) "POMODORO")))
 	(if len
 	    (setq  org-pomodoro-length (string-to-number len))
 	    nil)))
-    #+END_SRC
-*** ranger
-    :PROPERTIES:
-    :ID:       dc55da17-d580-4e76-9a66-13307a71a1ce
-    :END:
-    open from selection
-    #+BEGIN_SRC emacs-lisp :results silent 
+
       (defun hydra-ergo-ranger ()
 	"Try to open the selected region if there is one, otherwise just call ranger."
 	(interactive)
 	(if (region-active-p)
 	    (ranger (buffer-substring (region-beginning) (region-end)))
 	  (ranger)))
-   #+END_SRC
-*** org-database-helpers
-    Running this in config.org instead under rand-theme header.
-    #+BEGIN_SRC emacs-lisp :results silent tangle:no
+
       ;; (setq hydra-ergo-dir "/home/olle/.emacs.d/hydra-ergo/")
       ;; (load (concat hydra-ergo-dir "hydra-ergo-org-db-helpers.el"))
       ;; (setq hydra-ergo-fav-themes-fname (concat
       ;; 			 hydra-ergo-dir "fav-themes.org"))
       ;; (hydra-ergo-org-to-vars hydra-ergo-fav-themes-fname)
-    #+end_src
