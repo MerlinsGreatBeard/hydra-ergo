@@ -132,7 +132,8 @@
  #+BEGIN_SRC emacs-lisp :results silent
    (defhydra hydra-ergo-i-menu (:color blue)
 	   "i-menu"
-	   ("e" find-file)
+	   ("f" find-file)
+	   ("w" burly-bookmark-windows)
 	   ("o" bookmark-jump)
 	   ("p" bookmark-set)
 	   ("i" bookmark-bmenu-list))
