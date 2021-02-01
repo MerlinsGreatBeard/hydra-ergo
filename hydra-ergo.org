@@ -215,6 +215,7 @@
        ("i" (ergo-surround #x2F))
        ;; ("i" (lambda (&optional arg) (interactive "p") (sp-wrap-with-pair "/")))
        ("b" (ergo-surround #x2A))
+       ("c" (ergo-surround #x7e))
        ("u" (ergo-surround #x5F))
        ("k" (ergo-surround #x2b)))
    #+END_SRC
@@ -320,7 +321,7 @@
      (defhydra hydra-ergo-org-download (:color blue)
        ("i" (lambda ()
 	      (interactive)
-	      (org-download-image "/mnt/hgfs/CTemp/temp.png")))
+	      (org-download-image "C:/Users/SEOLSV/Pictures/Snapshot/Capture.png")))
        ("d" org-download-delete))
    #+END_SRC 
 *** org-rifle
