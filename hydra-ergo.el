@@ -1,15 +1,14 @@
   (defhydra hydra-ergo (evil-normal-state-map "SPC" :color blue)
-  "hydra-ergo "
-  ("a" execute-extended-command :color blue)
-
+    "hydra-ergo "
+    ("a" execute-extended-command :color blue)
     ("d" hydra-ergo-d-menu/body :color blue)
     ("e" hydra-ergo-e-menu/body :color blue)
     ("f" switch-to-buffer :color blue)
     ("i" hydra-ergo-i-menu/body :color blue)
     ("o" (lambda ()
-	    (interactive)
-	    (other-window 1)
-	    (hydra-ergo-o-menu/body)) :color blue)
+	   (interactive)
+	   (other-window 1)
+	   (hydra-ergo-o-menu/body)) :color blue)
     ("r" hydra-ergo-r-menu/body :color blue)
     ("ö" save-buffer :color blue)
     ("w" ace-window :color blue)
@@ -35,7 +34,8 @@
 	   (setq abbr-swe (not abbr-swe))
 	   (load "~/.emacs.d/lisp/my-abbrev.el")))
     ("x" hydra-ergo-x-menu/body :color blue)
-    ("," fixup-whitespace :color blue))
+    ("," fixup-whitespace :color blue)
+    ("z" hydra-ergo-z-menu/body :color blue))
     ;; (global-set-key (kbd "M-SPC") 'hydra-ergo/body)
     ;; (define-key evil-motion-state-map (kbd "SPC") 'hydra-ergo/body)
 
@@ -98,7 +98,8 @@
 
    (defhydra hydra-ergo-i-menu (:color blue)
 	   "i-menu"
-	   ("e" find-file)
+	   ("f" find-file)
+	   ("w" burly-bookmark-windows)
 	   ("o" bookmark-jump)
 	   ("p" bookmark-set)
 	   ("i" bookmark-bmenu-list))
@@ -226,6 +227,20 @@
       ("j" make-frame-command)
       ("k" delete-frame))
 
+(defhydra hydra-ergo-bt-menu (:color blue)
+  ("c" (lambda (arg)
+	 (interactive (list (completing-read "device:" (split-string (shell-command-to-string "bluetoothctl devices") "\n") nil)))
+	 (shell-command (concat "bluetoothctl connect " 
+				(cadr (split-string arg " "))))) "connect to bt device")
+  ("d" (lambda ()
+	 (interactive)
+	 (shell-command "bluetoothctl disconnect")) "disconnect device")
+  ("s" (lambda ()
+	 (interactive)
+	 (shell)
+	 (switch-to-buffer "*shell*")
+	 (insert "bluetoothctl")) "run shell"))
+
      (defhydra hydra-ergo-org-download (:color blue)
        ("i" (lambda ()
 	      (interactive)
@@ -305,3 +320,16 @@
       ;; (setq hydra-ergo-fav-themes-fname (concat
       ;; 			 hydra-ergo-dir "fav-themes.org"))
       ;; (hydra-ergo-org-to-vars hydra-ergo-fav-themes-fname)
+
+(defhydra hydra-ergo-z-menu (:color blue)
+  ("-" pulseaudio-control-decrease-volume "decrease-volume" :color red)
+  ("d" pulseaudio-control-display-volume "display-volume")
+  ("+" pulseaudio-control-increase-volume "increase-volume" :color red)
+  ("m" pulseaudio-control-toggle-current-sink-mute "toggle-current-sink-mute")
+  ("x" pulseaudio-control-toggle-sink-mute-by-index "toggle-sink-mute-by-index")
+  ("e" pulseaudio-control-toggle-sink-mute-by-name "toggle-sink-mute-by-name")
+  ("]" pulseaudio-control-toggle-use-of-default-sink "toggle-use-of-default-sink")
+  ("i" pulseaudio-control-select-sink-by-index "select-sink-by-index")
+  ("n" pulseaudio-control-select-sink-by-name "select-sink-by-name")
+  ("v" pulseaudio-control-set-volume "set-volume")
+  ("b" hydra-ergo-bt-menu/body "bluetooth menu"))
