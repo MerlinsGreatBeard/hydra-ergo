@@ -91,7 +91,8 @@
    (defhydra hydra-ergo-d-menu (:color blue)
      ("f" dired)
      ("j" dired-jump)
-     ("k" hydra-ergo-ranger))
+     ("k" hydra-ergo-ranger)
+     ("w" ranger-kill-buffers-without-window) "ranger-kill-buffers-without-window)")
 
    (defhydra hydra-ergo-e-menu (:color blue)
     ("j" quick-calc))
@@ -157,6 +158,7 @@
        ("i" (ergo-surround #x2F))
        ;; ("i" (lambda (&optional arg) (interactive "p") (sp-wrap-with-pair "/")))
        ("b" (ergo-surround #x2A))
+       ("c" (ergo-surround #x7e))
        ("u" (ergo-surround #x5F))
        ("k" (ergo-surround #x2b)))
 
@@ -244,7 +246,7 @@
      (defhydra hydra-ergo-org-download (:color blue)
        ("i" (lambda ()
 	      (interactive)
-	      (org-download-image "/mnt/hgfs/CTemp/temp.png")))
+	      (org-download-image "C:/Users/SEOLSV/Pictures/Snapshot/Capture.png")))
        ("d" org-download-delete))
 
       (defhydra hydra-ergo-org-rifle (:color blue)
