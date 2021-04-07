@@ -4,6 +4,9 @@
   :ID:       3c84cb21-89c4-4784-a166-207419370f2e
   :END:
 ** Top
+   :PROPERTIES:
+   :ID:       5fcda58e-846d-4160-8265-00191ee60dfb
+   :END:
 #+BEGIN_SRC emacs-lisp :results silent  
   (defhydra hydra-ergo (evil-normal-state-map "SPC" :color blue)
   "hydra-ergo "
@@ -237,6 +240,9 @@
 
    #+END_SRC
 ** T-menu
+   :PROPERTIES:
+   :ID:       e736107d-12f5-4926-a9bb-e2b0b3c9ec29
+   :END:
    #+BEGIN_SRC emacs-lisp :results silent 
 (defun save-theme-settings (group)
   (let ((curr-theme (car custom-enabled-themes)))
@@ -267,6 +273,9 @@
   ("q" nil "quit"))
    #+END_SRC
 ** x-menu
+   :PROPERTIES:
+   :ID:       b5a2622c-d6c0-4f8f-9332-d3d9df30e041
+   :END:
   #+BEGIN_SRC emacs-lisp :results silent 
     (defhydra hydra-ergo-x-menu (:color blue)
       ("r" (lambda ()
@@ -293,6 +302,9 @@
      ("c" yankpad-set-category "yankpad-set-category"))
  #+END_SRC
 ** §-menu
+   :PROPERTIES:
+   :ID:       2aa06324-858d-4372-be11-8f2558330516
+   :END:
    shell-commands
    #+BEGIN_SRC emacs-lisp :results silent 
      (defhydra hydra-ergo-§-menu (:color blue)
@@ -311,7 +323,8 @@
   #+BEGIN_SRC emacs-lisp :results silent
     (defhydra hydra-ergo-5-menu (:color blue)
       ("j" make-frame-command)
-      ("k" delete-frame))
+      ("k" delete-frame)
+      ("o" other-frame "other-frame" :color red))
   #+END_SRC 
 ** Subhydras
 *** org-download
@@ -334,8 +347,13 @@
       ("j" helm-org-rifle "Show results from all open Org buffers")
       ("a" helm-org-rifle-agenda-files "Show results from Org agenda files")
       ("b" helm-org-rifle-current-buffer "Show results from current buffer")
-      ("d" helm-org-rifle-directories "Show results from selected directories; with prefix, recursively")
-      ("r" helm-org-rifle-files "Show results from selected files")
+      ("d" helm-org-rifle-directories "Show results from selected directories")
+      ("r" (lambda ()
+	     (interactive)
+	     ;; (setq current-prefix-arg '(4)) ; C-u
+	     (helm-org-rifle-directories nil t)
+	     ) "Show results from selected directories recursively")
+      ("s" helm-org-rifle-files "Show results from selected files")
       ("o" helm-org-rifle-org-directory "Show results from Org files in org-directory")
       ("c" hydra-ergo-org-rifle-occur/body "Occur variants")
       ("m" (lambda ()
@@ -353,6 +371,9 @@
       ("o" helm-org-rifle-occur-org-directory "Show results from Org files in org-directory"))
     #+END_SRC
 *** org-brain
+    :PROPERTIES:
+    :ID:       4f03220d-6716-49b9-8095-dfbac2248c8d
+    :END:
     #+BEGIN_SRC emacs-lisp :results silent 
 	  (defun hydra-ergo-swbrain (brain)
 	    (setq hydra-ergo-chosen-brain (cdr (assoc brain org-brains)))
@@ -423,6 +444,9 @@
 	  (ranger)))
    #+END_SRC
 *** org-database-helpers
+    :PROPERTIES:
+    :ID:       f277de94-0e45-4a7b-a2bb-5291754d66cf
+    :END:
     Running this in config.org instead under rand-theme header.
     #+BEGIN_SRC emacs-lisp :results silent tangle:no
       ;; (setq hydra-ergo-dir "/home/olle/.emacs.d/hydra-ergo/")
