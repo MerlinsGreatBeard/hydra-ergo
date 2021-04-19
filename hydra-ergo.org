@@ -20,6 +20,10 @@
 	    (interactive)
 	    (other-window 1)
 	    (hydra-ergo-o-menu/body)) :color blue)
+    ("O" (lambda ()
+	    (interactive)
+	    (other-frame 1)
+	    (hydra-ergo-capital-o-menu/body)) :color blue)
     ("r" hydra-ergo-r-menu/body :color blue)
     ("ö" save-buffer :color blue)
     ("w" ace-window :color blue)
@@ -184,6 +188,15 @@
  (defhydra hydra-ergo-o-menu (:color red)
 	 ("o" other-window :color red))
  #+END_SRC
+** O-menu
+   :PROPERTIES:
+   :ID:       fd2e6082-b530-4572-9bac-74fa80fee2ac
+   :END:
+ #+BEGIN_SRC emacs-lisp :results silent
+   (defhydra hydra-ergo-capital-o-menu (:color red)
+     ("o" other-window :color red)
+     ("O" other-frame :color red))
+ #+END_SRC
 ** r-menu
    :PROPERTIES:
    :ID:       5f95bea7-bd96-4edc-b415-e87fad0d23fe
@@ -324,7 +337,8 @@
     (defhydra hydra-ergo-5-menu (:color blue)
       ("j" make-frame-command)
       ("k" delete-frame)
-      ("o" other-frame "other-frame" :color red))
+      ("o" other-frame "other-frame" :color red)
+      ("q" nil "quit"))
   #+END_SRC 
 ** Subhydras
 *** org-download
