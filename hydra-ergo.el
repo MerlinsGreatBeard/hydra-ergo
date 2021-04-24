@@ -92,7 +92,7 @@
      ("f" dired)
      ("j" dired-jump)
      ("k" hydra-ergo-ranger)
-     ("w" ranger-kill-buffers-without-window) "ranger-kill-buffers-without-window)")
+     ("w" ranger-kill-buffers-without-window "ranger-kill-buffers-without-window)"))
 
    (defhydra hydra-ergo-e-menu (:color blue)
     ("j" quick-calc))

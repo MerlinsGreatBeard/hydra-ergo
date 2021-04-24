@@ -335,6 +335,7 @@
 (defhydra hydra-ergo-bt-menu (:color blue)
   ("c" (lambda (arg)
 	 (interactive (list (completing-read "device:" (split-string (shell-command-to-string "bluetoothctl devices") "\n") nil)))
+	 (shell-command "bluetoothctl power on")
 	 (shell-command (concat "bluetoothctl connect " 
 				(cadr (split-string arg " "))))) "connect to bt device")
   ("d" (lambda ()
