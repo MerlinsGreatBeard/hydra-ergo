@@ -465,3 +465,4 @@
       ;; (hydra-ergo-org-to-vars hydra-ergo-fav-themes-fname)
     #+end_src
     
+    
