@@ -9,21 +9,20 @@
    :END:
 #+BEGIN_SRC emacs-lisp :results silent  
   (defhydra hydra-ergo (evil-normal-state-map "SPC" :color blue)
-  "hydra-ergo "
-  ("a" execute-extended-command :color blue)
-
+    "hydra-ergo "
+    ("a" execute-extended-command :color blue)
     ("d" hydra-ergo-d-menu/body :color blue)
     ("e" hydra-ergo-e-menu/body :color blue)
     ("f" switch-to-buffer :color blue)
     ("i" hydra-ergo-i-menu/body :color blue)
     ("o" (lambda ()
-	    (interactive)
-	    (other-window 1)
-	    (hydra-ergo-o-menu/body)) :color blue)
+	   (interactive)
+	   (other-window 1)
+	   (hydra-ergo-o-menu/body)) :color blue)
     ("O" (lambda ()
-	    (interactive)
-	    (other-frame 1)
-	    (hydra-ergo-capital-o-menu/body)) :color blue)
+	   (interactive)
+	   (other-frame 1)
+	   (hydra-ergo-capital-o-menu/body)) :color blue)
     ("r" hydra-ergo-r-menu/body :color blue)
     ("ö" save-buffer :color blue)
     ("w" ace-window :color blue)
@@ -50,8 +49,8 @@
 	   (load "~/.emacs.d/lisp/my-abbrev.el")))
     ("x" hydra-ergo-x-menu/body :color blue)
     ("," fixup-whitespace :color blue))
-    ;; (global-set-key (kbd "M-SPC") 'hydra-ergo/body)
-    ;; (define-key evil-motion-state-map (kbd "SPC") 'hydra-ergo/body)
+  ;; (global-set-key (kbd "M-SPC") 'hydra-ergo/body)
+  ;; (define-key evil-motion-state-map (kbd "SPC") 'hydra-ergo/body)
 #+END_SRC
    Create an intercept mode map for hydra-ergo. This will have a higher precedence than the normal and motion state maps
    [[https://github.com/noctuid/evil-guide#unbinding-a-key][found here]] 
@@ -84,6 +83,35 @@
  I'm also adding some timer functions in here since it seems to fit with the organization/adm theme.
  #+BEGIN_SRC emacs-lisp :results silent
    (defhydra hydra-ergo-c-menu (:color blue)
+     ("a" (lambda ()
+	    (interactive)
+	    (org-entry-put nil "TRIGGER" (concat (completing-read "finder"
+								  '("ancestors"
+								    "children"
+								    "descendants"
+								    "file"
+								    "first-child"
+								    "ids"
+								    "match"
+								    "next-sibling"
+								    "next-sibling-wrap"
+								    "olp"
+								    "org-file"
+								    "parent"
+								    "previous-sibling"
+								    "previous-sibling-wrap"
+								    "relatives"
+								    "rest-of-siblings"
+								    "rest-of-siblings-wrap"
+								    "self"
+								    "siblings"
+								    "siblings-wrap"))
+						 " "
+						 (completing-read "action"
+								  '(
+								    "scheduled!"
+								    "deadline!"))
+						 "(\"++0h\")"))))
      ("b" hydra-ergo-org-brain/body)
      ("e" org-journal-new-entry)
      ("n" org-narrow-to-subtree)
