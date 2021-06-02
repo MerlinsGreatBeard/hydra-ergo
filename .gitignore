@@ -2,3 +2,5 @@
 *.el~
 *.org~
 /.gitignore~
+hydra-ergo.el
+hydra-ergo.el
