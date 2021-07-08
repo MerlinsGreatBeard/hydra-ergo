@@ -412,6 +412,10 @@
        ("i" (lambda ()
 	      (interactive)
 	      (org-download-image "C:/Users/SEOLSV/Pictures/Snapshot/Capture.png")))
+       ("f" (lambda ()
+	      (interactive)
+	      (org-download-image
+	       (read-file-name "filnamn: " "C:/temp/"))))
        ("d" org-download-delete))
    #+END_SRC 
 *** org-rifle
@@ -451,28 +455,29 @@
     :ID:       4f03220d-6716-49b9-8095-dfbac2248c8d
     :END:
     #+BEGIN_SRC emacs-lisp :results silent 
-	  (defun hydra-ergo-swbrain (brain)
-	    (setq hydra-ergo-chosen-brain (cdr (assoc brain org-brains)))
-	    ;; (setq org-id-locations-file (convert-standard-filename (car (cdr hydra-ergo-chosen-brain))))
-	    ;; hmm are we removing some important locations here?  
-	    ;; replace with function that removes files from other brain       
-	    ;; see cl-remove-if 
-	    (setq org-id-files 
-		  (cl-remove-if (lambda (file)
-				  (string-match org-brain-pattern file)) org-id-files))
-	    (org-brain-switch-brain hydra-ergo-chosen-brain)
-	    ;; Mark this brain to be used on next startup 
-	    ;; Since org-id-update-id-locations() will save the new file/id associations for the new brain to be used on next startup.
-	    (with-temp-file "~/.emacs.d/emacs-current-brain"
-	      (insert org-brain-path))
-	    ;; (setq org-brain-path (car hydra-ergo-chosen-brain))
-	    )
-	  (defhydra hydra-ergo-brain-switch (:color blue)
-	    ("c" (hydra-ergo-swbrain 'c))
-	    ("h" (hydra-ergo-swbrain 'h)))
-	  (defhydra hydra-ergo-org-brain (:color blue)
-	    ("b" org-brain-visualize "org-brain-visualize")
-	    ("s" hydra-ergo-brain-switch/body "switch brain"))
+      (defun hydra-ergo-swbrain (brain)
+	(setq hydra-ergo-chosen-brain (cdr (assoc brain org-brains)))
+	;; (setq org-id-locations-file (convert-standard-filename (car (cdr hydra-ergo-chosen-brain))))
+	;; hmm are we removing some important locations here?  
+	;; replace with function that removes files from other brain       
+	;; see cl-remove-if 
+	(setq org-id-files 
+	      (cl-remove-if (lambda (file)
+			      (string-match org-brain-pattern file)) org-id-files))
+	(org-brain-switch-brain hydra-ergo-chosen-brain)
+	;; Mark this brain to be used on next startup 
+	;; Since org-id-update-id-locations() will save the new file/id associations for the new brain to be used on next startup.
+	(with-temp-file "~/.emacs.d/emacs-current-brain"
+	  (insert org-brain-path))
+	;; (setq org-brain-path (car hydra-ergo-chosen-brain))
+	)
+      (defhydra hydra-ergo-brain-switch (:color blue)
+	("c" (hydra-ergo-swbrain 'c))
+	("h" (hydra-ergo-swbrain 'h)))
+      (defhydra hydra-ergo-org-brain (:color blue)
+	("b" org-brain-visualize "org-brain-visualize")
+	("s" hydra-ergo-brain-switch/body "switch brain")
+	("m" brain-find-mirror-file "find mirror file"))
     #+END_SRC
 *** org-ql
 ** Help Functions
