@@ -13,7 +13,7 @@
     ("a" execute-extended-command :color blue)
     ("d" hydra-ergo-d-menu/body :color blue)
     ("e" hydra-ergo-e-menu/body :color blue)
-    ("f" switch-to-buffer :color blue)
+    ("f" persp-switch-to-buffer :color blue)
     ("i" hydra-ergo-i-menu/body :color blue)
     ("o" (lambda ()
 	   (interactive)
@@ -352,20 +352,6 @@
      ("e" yankpad-expand "yankpad-expand")
      ("c" yankpad-set-category "yankpad-set-category"))
  #+END_SRC
-** §-menu
-   :PROPERTIES:
-   :ID:       2aa06324-858d-4372-be11-8f2558330516
-   :END:
-   shell-commands
-   #+BEGIN_SRC emacs-lisp :results silent 
-     (defhydra hydra-ergo-§-menu (:color blue)
-       ("l" (lambda ()
-	      (interactive)
-	      (call-process "xrandr" nil nil nil "--output" "Virtual1" "--mode" "1920x1080_60.00")) "laptop")
-       ("d" (lambda ()
-	      (interactive)
-	      (call-process "xrandr" nil nil nil "--output" "Virtual1" "--mode" "1920x1200_60.00")) "docked"))
-   #+END_SRC
 ** 5-menu
    :PROPERTIES:
    :ID:       abddb871-062c-4b0d-99c4-e6f79940a4c1
@@ -419,7 +405,7 @@
      (defhydra hydra-ergo-org-download (:color blue)
        ("i" (lambda ()
 	      (interactive)
-	      (org-download-image "C:/Users/SEOLSV/Pictures/Snapshot/Capture.png")))
+	      (org-download-image "c:/Users/SEOLSV/OneDrive - Hoganas AB/Bilder/Snapshot/Capture.png")))
        ("f" (lambda ()
 	      (interactive)
 	      (org-download-image
