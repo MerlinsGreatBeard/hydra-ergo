@@ -425,7 +425,7 @@
       ("r" (lambda ()
 	     (interactive)
 	     ;; (setq current-prefix-arg '(4)) ; C-u
-	     (helm-org-rifle-directories nil t)
+	     (helm-org-rifle-directories nil nil)
 	     ) "Show results from selected directories recursively")
       ("s" helm-org-rifle-files "Show results from selected files")
       ("o" helm-org-rifle-org-directory "Show results from Org files in org-directory")

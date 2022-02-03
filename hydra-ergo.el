@@ -3,7 +3,7 @@
   ("a" execute-extended-command :color blue)
   ("d" hydra-ergo-d-menu/body :color blue)
   ("e" hydra-ergo-e-menu/body :color blue)
-  ("f" switch-to-buffer :color blue)
+  ("f" persp-switch-to-buffer :color blue)
   ("i" hydra-ergo-i-menu/body :color blue)
   ("o" (lambda ()
 	 (interactive)
