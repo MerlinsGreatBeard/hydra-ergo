@@ -14,6 +14,7 @@
     ("d" hydra-ergo-d-menu/body :color blue)
     ("e" hydra-ergo-e-menu/body :color blue)
     ("f" persp-switch-to-buffer :color blue)
+    ("g" mgb/sel-from-org-prop)
     ("i" hydra-ergo-i-menu/body :color blue)
     ("o" (lambda ()
 	   (interactive)
@@ -53,7 +54,7 @@
     ;; (global-set-key (kbd "M-SPC") 'hydra-ergo/body)
     ;; (define-key evil-motion-state-map (kbd "SPC") 'hydra-ergo/body)
 #+END_SRC
-   Create an intercept mode map for hydra-ergo. This will have a higher precedence than the normal and motion state maps
+Create an intercept mode map for hydra-ergo. This will have a higher precedence than the normal and motion state maps
    [[https://github.com/noctuid/evil-guide#unbinding-a-key][found here]] 
    #+begin_src emacs-lisp :results silent
      (defvar hydra-ergo-intercept-mode-map (make-sparse-keymap)
@@ -359,8 +360,8 @@
    Frame commands. Many of those are on C-x <number> commands, hence 5-menu.
   #+BEGIN_SRC emacs-lisp :results silent
     (defhydra hydra-ergo-5-menu (:color blue)
-      ("j" make-frame-command)
-      ("k" delete-frame)
+      ("c" make-frame-command)
+      ("d" delete-frame)
       ("o" other-frame "other-frame" :color red)
       ("q" nil "quit"))
   #+END_SRC 
@@ -530,5 +531,30 @@
       ;; 			 hydra-ergo-dir "fav-themes.org"))
       ;; (hydra-ergo-org-to-vars hydra-ergo-fav-themes-fname)
     #+end_src
-    
-    
+*** sel-from-org-prop
+:PROPERTIES:
+:menuname: Brännartyp
+:menuitems: STD SUPER
+:END:
+complete-read with selection candidates from menu in Property drawer under current org-heading
+#+begin_src elisp
+  (defun mgb/sel-from-org-prop ()
+    (interactive)
+    (let ((name (org-entry-get (point) "menuname"))
+	  (items (org-entry-get (point) "menuitems")))
+      ;; (print (type-of (split-string items)))
+      (insert (completing-read name (split-string items)))
+      (when (org-table-p)
+	(org-table-align))
+      ))
+  ;;   ((insert (completing-read "Brännartyp" '("STD" "SUPER")))))
+  ;; (lambda ()
+  ;;        (let ((header (car (-filter #'stringp (org-heading-components)))))
+  ;; 	 (when (string= header tblfilter)
+  ;; 	   (setq rtbl (nconc rtbl (org-table-to-lisp)))
+  ;; 	   ))))
+
+#+end_src
+
+#+RESULTS:
+: mgb/sel-from-org-prop
