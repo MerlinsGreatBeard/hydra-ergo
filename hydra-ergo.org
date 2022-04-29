@@ -148,7 +148,8 @@ Create an intercept mode map for hydra-ergo. This will have a higher precedence 
      ("s" (org-sparse-tree))
      ("f" (org-refile))
      ("y" (org-paste-special nil))
-     ("q" (org-ql-menu/body) "org-ql menu"))
+     ("q" (org-ql-menu/body) "org-ql menu")
+     )
  #+END_SRC
 ** d-menu_
    :PROPERTIES:
@@ -268,12 +269,13 @@ Create an intercept mode map for hydra-ergo. This will have a higher precedence 
    #+BEGIN_SRC emacs-lisp :results silent 
      (defhydra hydra-ergo-s-menu (:color blue)
        "Format Text org-mode-style"
-       ("i" (ergo-surround #x2F))
+       ("i" (ergo-surround #x2F #x2F 1))
        ;; ("i" (lambda (&optional arg) (interactive "p") (sp-wrap-with-pair "/")))
-       ("b" (ergo-surround #x2A))
-       ("c" (ergo-surround #x7e))
-       ("u" (ergo-surround #x5F))
-       ("k" (ergo-surround #x2b)))
+       ("b" (ergo-surround #x2A #x2A 1))
+       ("c" (ergo-surround #x7e #x7e 1))
+       ("u" (ergo-surround #x5F #x5F 1))
+       ("k" (ergo-surround #x2b #x2b 1))
+       ("r" (ergo-surround #x3C #x3E 3)))
    #+END_SRC
 ** t-menu
    :PROPERTIES:
@@ -484,15 +486,23 @@ Create an intercept mode map for hydra-ergo. This will have a higher precedence 
     :ID:       df4934fe-bbab-4bc5-949a-a8e7ca8b7b68
     :END:
     #+BEGIN_SRC emacs-lisp :results silent
-    (defun ergo-surround (c)
+      (defun ergo-surround (begc endc repeat)
 	(interactive)
-	(backward-char)
-	(evil-forward-WORD-end)
-	(forward-char)
-	(insert-char c)
-	(evil-backward-WORD-begin)
-	(insert-char c)
-	(evil-forward-WORD-end))
+	(let ((i 0))
+	  (backward-char)
+	  (evil-forward-WORD-end)
+	  (forward-char)
+	  (while (< i repeat)
+	    (insert-char endc)
+	    (setq i (+ 1 i))
+	    )
+	  (setq i 0)
+	  (evil-backward-WORD-begin)
+	  (while (< i repeat)
+	    (insert-char begc)
+	    (setq i (+ 1 i))
+	    )
+	  (evil-forward-WORD-end)))
     #+END_SRC
 *** pomodoro
     :PROPERTIES:
