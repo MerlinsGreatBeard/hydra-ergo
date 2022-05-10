@@ -298,33 +298,34 @@ Create an intercept mode map for hydra-ergo. This will have a higher precedence 
    :ID:       e736107d-12f5-4926-a9bb-e2b0b3c9ec29
    :END:
    #+BEGIN_SRC emacs-lisp :results silent 
-(defun save-theme-settings (group)
-  (let ((curr-theme (car custom-enabled-themes)))
-    (if (listp (symbol-value (intern group)))
-	(add-to-list (intern group) curr-theme)
-      (set (intern group) (list curr-theme)))
-    (when (file-exists-p hydra-ergo-fav-themes-fname)
-      (hydra-ergo-add-var-orgfile hydra-ergo-fav-themes-fname group (symbol-name
-								     curr-theme)))))
-(defhydra hydra-ergo-cap-t-menu (:color red :post (set-fringe-style 0))
-  "Theme Commands"
-  ("j" rand-theme-iterate "rand theme iterate")
-  ("k" rand-theme-iterate-backwards "rand theme iterate backwards")
-  ("f" rand-theme "rand theme")
-  ("r" (reload-theme) "reload-theme")
-  ("d" (progn
-	 (save-theme-settings "fav-dark-themes")
-	 (print "Theme added to fav-dark-themes")) "add to fav-dark")
-  ("l" (progn
-	 (save-theme-settings "fav-light-themes")
-	 (print "Theme added to fav-light-themes")) "add to fav-light")
-  ("u" (progn
-	 (save-theme-settings "rand-theme-unwanted")
-	 (print "Theme added to unwanted-themes")) "add to unwanted themes")
-  ("n" (lambda ()
-	 (interactive)
-	 (print (car custom-enabled-themes))) "show name of current theme")
-  ("q" nil "quit"))
+     (defun save-theme-settings (group)
+       (let ((curr-theme (car custom-enabled-themes)))
+	 (if (listp (symbol-value (intern group)))
+	     (add-to-list (intern group) curr-theme)
+	   (set (intern group) (list curr-theme)))
+	 (when (file-exists-p hydra-ergo-fav-themes-fname)
+	   (hydra-ergo-add-var-orgfile hydra-ergo-fav-themes-fname group (symbol-name
+									  curr-theme)))))
+     (defhydra hydra-ergo-cap-t-menu (:color red :post (set-fringe-style 0))
+       "Theme Commands"
+       ("j" rand-theme-iterate "rand theme iterate")
+       ("k" rand-theme-iterate-backwards "rand theme iterate backwards")
+       ("f" rand-theme "rand theme")
+       ("r" (reload-theme) "reload-theme")
+       ("d" (progn
+	      (save-theme-settings "fav-dark-themes")
+	      (print "Theme added to fav-dark-themes")) "add to fav-dark")
+       ("l" (rand-theme--load-theme (intern (completing-read "Load theme:" `(,@fav-dark-themes ,@fav-light-themes)))))
+       ("i" (progn
+	      (save-theme-settings "fav-light-themes")
+	      (print "Theme added to fav-light-themes")) "add to fav-light")
+       ("u" (progn
+	      (save-theme-settings "rand-theme-unwanted")
+	      (print "Theme added to unwanted-themes")) "add to unwanted themes")
+       ("n" (lambda ()
+	      (interactive)
+	      (print (car custom-enabled-themes))) "show name of current theme")
+       ("q" nil "quit"))
    #+END_SRC
 ** x-menu
    :PROPERTIES:
