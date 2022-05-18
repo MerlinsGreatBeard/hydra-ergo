@@ -43,7 +43,7 @@
     ("4" delete-other-windows :color blue)
     ("5" hydra-ergo-5-menu/body :color blue)
     ("0" delete-window :color blue)
-    ("<" calendar :color blue)
+    ("<" hydra-ergo-<-menu/body :color blue)
     ("å" (lambda ()
 	   (interactive)
 	   (setq abbr-swe (not abbr-swe))
@@ -383,6 +383,13 @@ Create an intercept mode map for hydra-ergo. This will have a higher precedence 
   ("v" pulseaudio-control-set-volume "set-volume")
   ("b" hydra-ergo-bt-menu/body "bluetooth menu"))
     #+end_src
+** <-menu
+cfw:open-org-calendar
+#+BEGIN_SRC emacs-lisp :results silent 
+  (defhydra hydra-ergo-<-menu (:color blue)
+    ("j" calendar "Simple Calendar")
+    ("o" cfw:open-org-calendar "Org-Calendar"))
+#+END_SRC
 ** Subhydras
 *** bluetooth
    #+BEGIN_SRC emacs-lisp :results silent

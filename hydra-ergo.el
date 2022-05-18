@@ -236,7 +236,8 @@ state))
   ("d" (progn
 	 (save-theme-settings "fav-dark-themes")
 	 (print "Theme added to fav-dark-themes")) "add to fav-dark")
-  ("l" (progn
+  ("l" (rand-theme--load-theme (intern (completing-read "Load theme:" `(,@fav-dark-themes ,@fav-light-themes)))))
+  ("i" (progn
 	 (save-theme-settings "fav-light-themes")
 	 (print "Theme added to fav-light-themes")) "add to fav-light")
   ("u" (progn
