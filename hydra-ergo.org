@@ -139,10 +139,18 @@ Create an intercept mode map for hydra-ergo. This will have a higher precedence 
 	    (interactive)
 	    (org-time-stamp-inactive '(16))
 	    (org-clock-update-time-maybe)))
+     ;; ("o" (lambda ()
+     ;; 	 (interactive)
+     ;; 	 (set-pomodoro-len-from-property)
+     ;; 	 (org-pomodoro)))
      ("o" (lambda ()
 	    (interactive)
-	    (set-pomodoro-len-from-property)
-	    (org-pomodoro)))
+	    (if org-timer-start-time
+		(org-timer-stop)
+	      (let ((pomotime 
+		     (completing-read "minutes:" '("14" "10" "8") nil nil "14")))
+		(hydra-mgb/pomodoro/body)
+		(org-timer-set-timer pomotime)))))
      ("x" (org-cut-special))
      ("w" (org-copy-special))
      ("s" (org-sparse-tree))
@@ -315,7 +323,7 @@ Create an intercept mode map for hydra-ergo. This will have a higher precedence 
        ("d" (progn
 	      (save-theme-settings "fav-dark-themes")
 	      (print "Theme added to fav-dark-themes")) "add to fav-dark")
-       ("l" (rand-theme--load-theme (intern (completing-read "Load theme:" `(,@fav-dark-themes ,@fav-light-themes)))))
+       ("l" (rand-theme--load-theme (intern (completing-read "Load theme:" `(,@fav-dark-themes ,@fav-light-themes ,@ef-themes-collection)))))
        ("i" (progn
 	      (save-theme-settings "fav-light-themes")
 	      (print "Theme added to fav-light-themes")) "add to fav-light")
@@ -485,6 +493,15 @@ cfw:open-org-calendar
 	("m" brain-find-mirror-file "find mirror file"))
     #+END_SRC
 *** org-ql
+*** org-pomodoro
+:LOGBOOK:
+CLOCK: [2022-08-19 fre 16:08]--[2022-08-19 fre 16:11] =>  0:03
+:END:
+#+BEGIN_SRC emacs-lisp :results silent
+  (defhydra hydra-mgb/pomodoro (nil nil)
+    ("i" org-clock-in "org-clock-in")
+    ("x" org-clock-in-last "org-clock-in-last"))
+#+END_SRC
 ** Help Functions
    :PROPERTIES:
    :ID:       ce94237c-1725-4a67-aba4-b1ce691d16aa
