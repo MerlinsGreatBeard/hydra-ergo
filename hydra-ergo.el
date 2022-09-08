@@ -123,14 +123,16 @@ state))
   ;; 	 (interactive)
   ;; 	 (set-pomodoro-len-from-property)
   ;; 	 (org-pomodoro)))
-  ("o" (lambda ()
-	 (interactive)
-	 (if org-timer-start-time
-	     (org-timer-stop)
-	   (let ((pomotime 
-		  (completing-read "minutes:" '("14" "10" "8") nil nil "14")))
-	     (hydra-mgb/pomodoro/body)
-	     (org-timer-set-timer pomotime)))))
+  ("o" (hydra-mgb/pomodoro/body)
+   ;; (lambda ()
+   ;; 	 (interactive)
+   ;; 	 (if org-timer-start-time
+   ;; 	     (org-timer-stop)
+   ;; 	   (let ((pomotime 
+   ;; 		  (completing-read "minutes:" '("14" "10" "8") nil nil "14")))
+   ;; 	     (hydra-mgb/pomodoro/body)
+   ;; 	     (org-timer-set-timer pomotime))))
+   )
   ("x" (org-cut-special))
   ("w" (org-copy-special))
   ("s" (org-sparse-tree))
@@ -244,7 +246,7 @@ state))
   ("d" (progn
 	 (save-theme-settings "fav-dark-themes")
 	 (print "Theme added to fav-dark-themes")) "add to fav-dark")
-  ("l" (rand-theme--load-theme (intern (completing-read "Load theme:" `(,@fav-dark-themes ,@fav-light-themes)))))
+  ("l" (rand-theme--load-theme (intern (completing-read "Load theme:" `(,@fav-dark-themes ,@fav-light-themes ,@ef-themes-collection)))))
   ("i" (progn
 	 (save-theme-settings "fav-light-themes")
 	 (print "Theme added to fav-light-themes")) "add to fav-light")
@@ -372,7 +374,14 @@ state))
   ("s" hydra-ergo-brain-switch/body "switch brain")
   ("m" brain-find-mirror-file "find mirror file"))
 
-(defhydra hydra-mgb/pomodoro (nil nil)
+(defhydra hydra-mgb/pomodoro (:pre (progn
+				(interactive)
+				(if org-timer-start-time
+				    (org-timer-stop)
+				  (setq hydra-mgb/pomotime 
+					(completing-read "minutes:" `(,hydra-mgb/pomotime "14" "10" "8") nil nil "14")
+				    ;; (hydra-mgb/pomodoro/body)
+				    (org-timer-set-timer pomotime)))))
   ("i" org-clock-in "org-clock-in")
   ("x" org-clock-in-last "org-clock-in-last"))
 
